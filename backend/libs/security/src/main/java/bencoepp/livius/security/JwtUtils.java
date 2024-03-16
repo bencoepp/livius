@@ -29,7 +29,7 @@ public class JwtUtils {
 
     /**
      * Generates a JSON Web Token (JWT) for the provided authentication.
-     *
+     * <p>
      * The generated JWT token contains the username of the authenticated user,
      * along with other claims such as the issued timestamp and expiration time.
      *

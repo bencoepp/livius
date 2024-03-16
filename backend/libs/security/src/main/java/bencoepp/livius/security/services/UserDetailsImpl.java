@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class UserDetailsImpl implements UserDetails {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String id;
@@ -35,7 +38,7 @@ public class UserDetailsImpl implements UserDetails {
 
     /**
      * Creates a UserDetailsImpl object with the provided information.
-     *
+     * <p>
      * Constructs a UserDetailsImpl object using the provided id, username, email, password, and authorities.
      *
      * @param id           The unique identifier for the user.
@@ -55,7 +58,7 @@ public class UserDetailsImpl implements UserDetails {
 
     /**
      * Builds a UserDetailsImpl object based on the provided User object.
-     *
+     * <p>
      * Constructs a UserDetailsImpl object using the user's id, username, email, password, and roles.
      * The user's roles are converted into a list of GrantedAuthority objects.
      *
@@ -102,9 +105,9 @@ public class UserDetailsImpl implements UserDetails {
 
     /**
      * Compares this UserDetailsImpl object with the specified object for equality.
-     *
+     * <p>
      * The comparison is based on the id property of the UserDetailsImpl object.
-     *
+     * <p>
      * Returns true if the specified object is also a UserDetailsImpl object,
      * and their id properties are equal. Otherwise, returns false.
      *

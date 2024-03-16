@@ -79,7 +79,8 @@ public class UserController {
     public void initializeRoles() throws JsonProcessingException {
         String input = getResourceFileAsString("data.json");
         ObjectMapper mapper = new ObjectMapper();
-        List<Role> roles = mapper.readValue(input, new TypeReference<List<Role>>(){});
+        List<Role> roles = mapper.readValue(input, new TypeReference<>() {
+        });
         roleRepository.deleteAll();
         roleRepository.saveAll(roles);
     }
@@ -95,7 +96,7 @@ public class UserController {
         InputStream is = getResourceFileAsInputStream(fileName);
         if (is != null) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            return (String)reader.lines().collect(Collectors.joining(System.lineSeparator()));
+            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
         } else {
             throw new RuntimeException("resource not found");
         }
