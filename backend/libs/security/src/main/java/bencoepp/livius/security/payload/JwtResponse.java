@@ -14,13 +14,13 @@ public class JwtResponse {
     /**
      * The variable "token" holds the JWT token associated with the authenticated user.
      * It is a String type variable.
-     *
+     * <p>
      * JwtResponse is the containing class of the initial symbol.
      * It represents the response object returned from the authentication process.
      * It contains the JWT token, user information, and the roles associated with the user.
-     *
+     * <p>
      * This variable is set using the constructor of JwtResponse, where the token parameter is passed.
-     *
+     * <p>
      * Example usage:
      * JwtResponse jwtResponse = new JwtResponse("eyJhbGciOiJIUzUxMi...", "1", "john", "john@example.com", ["ROLE_USER"]);
      * String token = jwtResponse.getToken();
@@ -29,12 +29,12 @@ public class JwtResponse {
     /**
      * The variable "type" represents the type of authentication used.
      * It is a private String variable and has a default value of "Bearer".
-     *
+     * <p>
      * This variable belongs to the class JwtResponse, which represents the response object returned from the authentication process.
      * JwtResponse contains the JWT token, user information, and the roles associated with the user.
-     *
+     * <p>
      * The value of "type" can be accessed using the getter and modified using the setter methods of JwtResponse class.
-     *
+     * <p>
      * Example usage:
      * JwtResponse jwtResponse = new JwtResponse("eyJhbGciOiJIUzUxMi...", "1", "john", "john@example.com", ["ROLE_USER"]);
      * String type = jwtResponse.getType(); // Returns "Bearer"
@@ -44,12 +44,12 @@ public class JwtResponse {
     /**
      * The variable "id" represents the unique identifier of a user.
      * It is a private String variable.
-     *
+     * <p>
      * This variable belongs to the class JwtResponse, which represents the response object returned from the authentication process.
      * JwtResponse contains the JWT token, user information, and the roles associated with the user.
-     *
+     * <p>
      * The value of "id" can be accessed using the getter method getId() of JwtResponse class.
-     *
+     * <p>
      * Example usage:
      * JwtResponse jwtResponse = new JwtResponse("eyJhbGciOiJIUzUxMi...", "1", "john", "john@example.com", ["ROLE_USER"]);
      * String id = jwtResponse.getId();
@@ -58,7 +58,7 @@ public class JwtResponse {
     private String id;
     /**
      * Represents the username associated with a user.
-     *
+     * <p>
      * This variable is a private instance variable of the class JwtResponse.
      * It stores the username of the user returned in the JwtResponse object.
      *

@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * Represents a user entity in a MongoDB collection.
- *
+ * <p>
  * The User class is used to model a user within a system,
  * storing their username, email, and password. It also
  * contains a Set of roles associated with the user, which
@@ -63,14 +63,8 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     /**
-     * Represents a user entity in a MongoDB collection.
-     */
-    public User() {
-    }
-
-    /**
      * Represents a User entity in a MongoDB collection.
-     *
+     * <p>
      * This class is used to model a user within a system,
      * storing their username, email, and password.
      *
