@@ -12,4 +12,4 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 21
-      - run: mvn -f pom.xml test
+      - run: mvn -f ./backend/pom.xml test
