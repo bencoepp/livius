@@ -1,0 +1,15 @@
+name: Run tests on Java 21
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run unit tests on Java 21
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 21
+      - run: mvn -f ./backend/pom.xml test
