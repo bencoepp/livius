@@ -1,0 +1,17 @@
+name: Frontend Build, Test & Release
+
+on: [push, pull_request]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/frontend
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        working-directory: ./frontend
+        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
