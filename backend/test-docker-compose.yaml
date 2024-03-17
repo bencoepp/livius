@@ -12,7 +12,7 @@ services:
     volumes:
       - mongo-data:/data/db
   eureka:
-    image: registry.bencoepp.de/siff/eureka
+    image: registry.bencoepp.de/livius/eureka
     ports:
       - "8761:8761"
 
