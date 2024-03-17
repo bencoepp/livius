@@ -2,12 +2,6 @@ name: Build Docker Images
 
 on: [push, pull_request]
 
-env:
-    # Use docker.io for Docker Hub if empty
-    REGISTRY: ghcr.io
-    # github.repository as <account>/<repo>
-    IMAGE_NAME: ${{ github.repository }}
-
 jobs:
     changes:
       runs-on: ubuntu-latest
@@ -29,12 +23,6 @@ jobs:
       needs: changes
       if: ${{ needs.changes.outputs.backend == 'true' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: write
-        # This is used to complete the identity challenge
-        # with sigstore/fulcio when running outside of PRs.
-        id-token: write
       steps:
         - uses: actions/checkout@v4
     frontend:
