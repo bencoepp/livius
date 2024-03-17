@@ -1,0 +1,14 @@
+site_name: Livius Documentation
+site_url: https://docs.livius.io
+copyright: Copyright &copy; 2021 - 2024 Ben Coepp Publishing
+repo_url: https://github.com/bencoepp/livius
+repo_name: bencoepp/livius
+plugins:
+  - tags
+theme:
+  name: material
+  features:
+    - navigation.footer
+  palette:
+    scheme: slate
+    primary: green
