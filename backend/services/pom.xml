@@ -19,6 +19,7 @@
         <module>user</module>
         <module>eureka</module>
         <module>gateway</module>
+        <module>data</module>
     </modules>
 
     <dependencies>
