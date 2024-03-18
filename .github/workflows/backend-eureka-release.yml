@@ -1,4 +1,4 @@
-name: Frontend Build, Test & Release
+name: Build & Release Eureka
 
 on: [push, pull_request]
 
@@ -23,11 +23,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup java
         uses: actions/setup-java@v1
+        id: output_build
         with:
           java-version: 21
       - run: mvn -f ./backend/pom.xml test
       - name: Build the Docker image
         working-directory: ./backend
-        run: docker build . --file Dockerfile --build-arg JAR_FILE=services/eureka/target/app.jar --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        run: docker build . --file Dockerfile --build-arg JAR_FILE=${{steps.output_build.outputs}}services/eureka/target/app.jar --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Push Image
         run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
