@@ -17,7 +17,6 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
   release:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
         - uses: actions/checkout@v3
         - name: Build the Docker image
