@@ -1,0 +1,26 @@
+name: Frontend Build, Test & Release
+
+on: [push, pull_request]
+
+env:
+  REGISTRY: registry.bencoepp.de
+  IMAGE_NAME: ${{ github.repository }}/frontend
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        working-directory: ./frontend
+        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+  release:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - name: Build the Docker image
+          working-directory: ./frontend
+          run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        - name: Push Image
+          run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
