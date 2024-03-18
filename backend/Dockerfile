@@ -1,8 +1,8 @@
-FROM registry.bencoepp.de/maven:3.9.6-amazoncorretto-21-debian AS builder
+FROM maven:3.9.6-amazoncorretto-21-debian AS builder
 ARG PATH
-COPY ${PATH} .
+COPY . .
 RUN mvn package
-FROM registry.bencoepp.de/openjdk:21-slim
-COPY --from=builder /target/app.jar /app.jar
+FROM openjdk:21-slim
+COPY --from=builder ${PATH}/target/app.jar /app.jar
 ENTRYPOINT ["java"]
 CMD ["-jar", "/app.jar"]
