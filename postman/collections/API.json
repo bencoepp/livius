@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "9e84eb82-9fc9-4832-a58f-dc619ce56f74",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "16895890-9e84eb82-9fc9-4832-a58f-dc619ce56f74"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"id": "8a99063d-ca54-485d-95ed-efef24e88dab",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"id": "1a3334a0-23c0-4239-925f-f5662ae307e4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Info",
+					"id": "b7450a82-364e-4b43-99be-3194577bc2c2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"id": "768bc2e6-00b5-45c4-aa51-0734349791b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1f1eacd7-9992-47f0-96ee-7be439d7405c"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "704bccd2-6234-46c7-90a8-29c8268bd9ef",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1c410f31-b6ca-4ae5-a004-973a6382e759",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6d7ca5ee-7164-45f0-8a04-dae86baeec84",
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "e8128a41-dfdd-4b70-918f-2b0e58bcddd4",
+			"key": "user",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
