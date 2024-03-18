@@ -23,4 +23,4 @@ jobs:
           working-directory: ./frontend
           run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
         - name: Push Image
-          run: docker push ${{ env.IMAGE_NAME }}
+          run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
