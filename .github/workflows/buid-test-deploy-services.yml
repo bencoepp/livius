@@ -1,4 +1,4 @@
-name: Run tests on Java 21
+name: Build and deliver backend services
 
 on: push
 
