@@ -73,29 +73,26 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
+                <version>0.44.0</version>
                 <configuration>
+                    <verbose>true</verbose>
                     <images>
                         <image>
                             <name>registry.bencoepp.de/livius/${project.artifactId}</name>
                             <build>
+                                <from>openjdk</from>
                                 <tags>
                                     <tag>${project.version}</tag>
                                 </tags>
+                                <ports>4000</ports>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <cmd>java -jar maven/app.jar</cmd>
                             </build>
                         </image>
                     </images>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>push</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
