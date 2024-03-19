@@ -3,6 +3,6 @@ ARG PATH
 COPY . .
 RUN mvn package
 FROM openjdk:21-slim
-COPY --from=builder ${PATH}/target/app.jar /app.jar
+COPY --from=builder /target/app.jar /app.jar
 ENTRYPOINT ["java"]
 CMD ["-jar", "/app.jar"]

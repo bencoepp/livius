@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @Configuration
@@ -18,6 +19,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableMongoRepositories(basePackages = "bencoepp.livius")
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableScheduling
 public class DataService {
     public static void main(String[] args) {
         SpringApplication.run(DataService.class, args);

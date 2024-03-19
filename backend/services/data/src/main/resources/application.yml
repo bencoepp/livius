@@ -7,7 +7,6 @@ spring:
     mongodb:
       uri: ${LIVIUS_DB_URI:mongodb://root:example@localhost:27017}
       database: ${LIVIUS_DB:testDb}
-
 management:
   endpoints:
     web:
