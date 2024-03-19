@@ -67,4 +67,12 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Livius Packages</name>
+            <url>https://maven.pkg.github.com/bencoepp/livius</url>
+        </repository>
+    </distributionManagement>
 </project>
