@@ -27,7 +27,7 @@ public class Weather {
     private String quality_control;
     private String wind;
     private Float cig;
-    private Float temperature;
+    private String temperature;
     private String dew;
     private Float slp;
 
@@ -45,7 +45,7 @@ public class Weather {
         this.quality_control = data[9];
         this.wind = data[10];
         this.cig = parseToFloat(data[11]);
-        this.temperature = parseToFloat(data[12]);
+        this.temperature = data[12];
         this.dew = data[13];
         this.slp = parseToFloat(data[14]);
     }
