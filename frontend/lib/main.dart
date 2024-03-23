@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart' hide Page;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
-import 'package:frontend/screens/home.dart';
+import 'package:frontend/screens/timeline.dart';
 import 'package:frontend/screens/settings.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -149,8 +149,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
   late final List<NavigationPaneItem> originalItems = [
     PaneItem(
       key: const ValueKey('/'),
-      icon: const Icon(FluentIcons.home),
-      title: const Text('Home'),
+      icon: const Icon(FluentIcons.timeline),
+      title: const Text('Timeline'),
       body: const SizedBox.shrink(),
     ),
   ].map<NavigationPaneItem>((e) {
@@ -273,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
                 context,
                 false,
                 onPressed,
-                displayMode: PaneDisplayMode.compact,
+                displayMode: PaneDisplayMode.minimal,
               ),
             ),
           );
@@ -374,7 +374,9 @@ final router = GoRouter(navigatorKey: rootNavigatorKey, routes: [
     },
     routes: [
       GoRoute(
-          name: '/', path: '/', builder: (context, state) => const HomePage()),
+          name: '/',
+          path: '/',
+          builder: (context, state) => const TimelinePage()),
       GoRoute(
           name: '/settings',
           path: '/settings',
