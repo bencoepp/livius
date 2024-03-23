@@ -5,8 +5,10 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.sql.Timestamp;
 
+/**
+ * The Weather class represents weather information.
+ */
 @Getter
 @Setter
 @Document(collection = "weather")
@@ -50,6 +52,12 @@ public class Weather {
         this.slp = parseToFloat(data[14]);
     }
 
+    /**
+     * This method is used to parse a String value to a float.
+     *
+     * @param value the String value to be parsed
+     * @return the parsed float value
+     */
     private float parseToFloat(String value){
         String sanitized = value.replaceAll("\"", ""); // remove all quotation marks
         return Float.parseFloat(sanitized);
