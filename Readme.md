@@ -14,27 +14,15 @@ this possible.
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Technologies & Concepts Demonstrated](#technologies--concepts-demonstrated)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Development](#development)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Project Overview
 
 A brief description of the project, its purpose, and functionality.
-
-## Technologies & Concepts Demonstrated
-
-1. Kubernetes
-2. Docker
-3. Spring
-4. Microservices
-5. DevOps
-6. CI/CD
-7. GitFlow
 
 ## Getting Started
 
@@ -42,7 +30,14 @@ Instructions on setting up the project, including pre-requisites, software requi
 
 ## Usage
 
-A comprehensive guide on how to use the tool and its functionalities.
+As already discussed in the project overview this project can not be used as a commercial software. All data will be 
+distributed under the same license as it was published and in no way, shape or form will there be made profit with the data
+in our system. The rules for using any of the data should be gained through the license of that respected data set. If 
+there are any questions about using the data represented in our system please contact us, or the license holder to resolve
+them. 
+
+We would love for you to cite us together with the respected data set when publishing any findings or when referring to 
+any issued data.
 
 ## Development
 
