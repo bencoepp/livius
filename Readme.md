@@ -16,13 +16,35 @@ this possible.
 - [Project Overview](#project-overview)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Development](#development)
 - [Contributing](#contributing)
 - [Contact](#contact)
 
 ## Project Overview
 
-A brief description of the project, its purpose, and functionality.
+We already discussed the problem and issue that this tool is trying to solve. But what how is the project organized and
+where can you find what. The basic project structure can be boiled down to this. 
+
+```
+/backend
+    /libs
+    /services
+/docs
+/frontend
+```
+
+The backend part of this project consists out of two parts. The projects java libraries (libs) and the services of the 
+backend. Information about a particular service, or library can be found under the documentation of the project. 
+
+Documentation can be as you have probably already guessed can be found under the /docs directory. This is a MkDocs 
+project that contains the entire documentation for the project, except for the api references. These can be found in there
+respected service directories. But they are referenced in the documentation. The entire documentation site can be found
+[here](https://livius.io/docs).
+
+The frontend project is a flutter application that represents the UI, as well as frontend tools to make it possible for
+the data to be visualized. The public version of this application can be found [here](https://livius.io).
+
+By popular discussion a cli tool might also become a part of this project depending on the importance as well as the 
+necessity for one.
 
 ## Getting Started
 
@@ -38,10 +60,6 @@ them.
 
 We would love for you to cite us together with the respected data set when publishing any findings or when referring to 
 any issued data.
-
-## Development
-
-Details on how to contribute to the project in terms of development, including any coding standards, branching strategy (GitFlow), etc.
 
 ## Contributing
 
