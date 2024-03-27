@@ -13,6 +13,7 @@ services:
       - mongo-data:/data/db
   eureka:
     image: registry.bencoepp.de/livius/eureka
+    restart: always
     ports:
       - "8761:8761"
 

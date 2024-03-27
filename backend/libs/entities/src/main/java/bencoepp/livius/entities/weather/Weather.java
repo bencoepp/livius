@@ -31,7 +31,7 @@ public class Weather {
     private Float cig;
     private String temperature;
     private String dew;
-    private Float slp;
+    private String slp;
 
     public Weather(String line) {
         String[] data = line.split(",");
@@ -49,7 +49,7 @@ public class Weather {
         this.cig = parseToFloat(data[11]);
         this.temperature = data[12];
         this.dew = data[13];
-        this.slp = parseToFloat(data[14]);
+        this.slp = data[14];
     }
 
     /**
