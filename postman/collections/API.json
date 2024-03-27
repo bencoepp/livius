@@ -71,6 +71,74 @@
 				}
 			],
 			"id": "1f1eacd7-9992-47f0-96ee-7be439d7405c"
+		},
+		{
+			"name": "Weather",
+			"item": [
+				{
+					"name": "All",
+					"id": "354638cf-9c46-4cc6-ac3f-a57cfe51a6cc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/weather/all?page=5&size=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"weather",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "5"
+								},
+								{
+									"key": "size",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By ID",
+					"id": "277964d1-5c77-4b66-aebc-44f125305955",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/weather/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"weather",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7a1e4622-8355-4830-98af-b6f7c925a6ee"
 		}
 	],
 	"event": [
