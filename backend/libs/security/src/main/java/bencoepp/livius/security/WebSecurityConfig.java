@@ -90,8 +90,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/api/health/**")
-                        .permitAll().requestMatchers("/actuator/**").permitAll().requestMatchers("/api/email/user/register").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**").permitAll().anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider());
         return http.build();
     }
