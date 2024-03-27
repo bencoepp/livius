@@ -2,6 +2,7 @@ package bencoepp.livius.utils;
 
 import bencoepp.livius.entities.weather.Weather;
 import bencoepp.livius.repositories.weather.WeatherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Service
 public class WeatherUtil {
-
+    @Autowired
     private WeatherRepository weatherRepository;
 
     /**
