@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs
+  namespace: livius
+  labels:
+    app: livius
+    tier: docs
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: livius
+      tier: docs
+  template:
+    metadata:
+      labels:
+        app: livius
+        tier: docs
+    spec:
+      containers:
+        - name: user-service-app
+          image: registry.bencoepp.de/livius/docs:latest
+          ports:
+            - containerPort: 8000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: docs-svc
+  namespace: livius
+spec:
+  selector:
+    app: livius
+    tier: docs
+  ports:
+    - port:  8000
+      targetPort:  8000
+      nodePort: 30090
+  type: NodePort

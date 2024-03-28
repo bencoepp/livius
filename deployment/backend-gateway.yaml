@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-dep
+  namespace: livius
+  labels:
+    app: livius
+    tier: gateway
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: livius
+      tier: gateway
+  template:
+    metadata:
+      labels:
+        app: livius
+        tier: gateway
+    spec:
+      containers:
+        - name: user-service-app
+          image: registry.bencoepp.de/livius/gateway:1.0.0.0
+          ports:
+            - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: gateway-svc
+  namespace: livius
+spec:
+  selector:
+    app: livius
+    tier: gateway
+  ports:
+    - port:  8080
+      targetPort:  8080
+      nodePort: 30070
+  type: NodePort
