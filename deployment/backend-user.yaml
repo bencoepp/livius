@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  namespace: livius
+  labels:
+    app: livius
+    tier: user
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: livius
+      tier: user
+  template:
+    metadata:
+      labels:
+        app: livius
+        tier: user
+    spec:
+      containers:
+        - name: user-service
+          image: registry.bencoepp.de/livius/user:1.0.0.0
+          ports:
+            - containerPort: 2000

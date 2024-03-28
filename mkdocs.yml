@@ -5,6 +5,8 @@ repo_url: https://github.com/bencoepp/livius
 repo_name: bencoepp/livius
 plugins:
   - tags
+  - neoteroi.mkdocsoad:
+      use_pymdownx: true
 theme:
   name: material
   features:
@@ -12,3 +14,8 @@ theme:
   palette:
     scheme: slate
     primary: green
+markdown_extensions:
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

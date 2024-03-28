@@ -1,0 +1,1 @@
+[OAD(./backend/services/weather/src/main/java/bencoepp/livius/weather/controller/api-doc.yaml)]

@@ -1,0 +1,23 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: DATA-SERVICE
+  data:
+    mongodb:
+      uri: ${LIVIUS_DB_URI:mongodb://root:example@localhost:27017}
+      database: ${LIVIUS_DB:testDb}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_LIVIUS:http://localhost:8761/eureka}

@@ -1,12 +1,12 @@
 server:
-  port: 1000
+  port: 2000
 spring:
   application:
     name: USER-SERVICE
   data:
     mongodb:
       uri: ${LIVIUS_DB_URI:mongodb://root:example@localhost:27017}
-      database: ${LIVIUS_DB:testsiff}
+      database: ${LIVIUS_DB:testDb}
 
 management:
   endpoints:
