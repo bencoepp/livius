@@ -8,5 +8,5 @@ jobs:
     name: Build and deliver docs
     steps:
       - uses: actions/checkout@master
-      - run: docker build -t registry.bencoepp.de/livius/docs . -f .\docs\Dockerfile
+      - run: docker build -t registry.bencoepp.de/livius/docs . -f ./docs/Dockerfile
       - run: docker push registry.bencoepp.de/livius/docs
