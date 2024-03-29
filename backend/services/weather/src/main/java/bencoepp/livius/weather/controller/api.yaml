@@ -1,0 +1,16 @@
+openapi: "3.0.2"
+info:
+  title: Livius - Weather API
+  description: The main api for handling weather data and the access to it.
+  version: "1.0.0.0"
+servers:
+  - url: https://livius.io
+    description: Public api, can be used for testing or general use. There are some limiters in place to prevent abuse.
+  - url: http://localhost:4000
+    description: API hosted through the localhost. This should be provided by you.
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
