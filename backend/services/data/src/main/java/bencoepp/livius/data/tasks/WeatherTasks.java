@@ -43,17 +43,27 @@ public class WeatherTasks {
      * For each subdirectory, it will download CSV files by calling the {@link #downloadCsvFiles(String)} method.
      */
     @EventListener(ApplicationReadyEvent.class)
-    public void importWeatherData(){
+    public void importWeatherData() {
         log.info("Weather data import started");
 
         List<String> directories = getSubDirectories(BASE_URL);
         log.info("Number of years found: " + directories.size());
 
-        directories.forEach(directory -> {
-            log.debug("Processing directory: " + directory);
-            downloadCsvFiles(directory);
-        });
+        if(weatherRepository.count() != 0){
+            String lastYear = findLastYearImported();
+        }else{
+            directories.forEach(directory -> {
+                log.debug("Processing directory: " + directory);
+                downloadCsvFiles(directory);
+            });
+        }
+
         log.info("Weather data finished importing");
+    }
+
+    private String findLastYearImported() {
+
+       return ";";
     }
 
     /**

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * The CountController class is a REST controller that handles count-related API requests for weather data.
  */
@@ -33,10 +35,10 @@ public class CountController {
      * @param id the station ID for which to get the weather record count
      * @return a ResponseEntity containing the count of weather records. Returns `ok` status with the count if the station exists, or `bad request` status otherwise
      */
-    @GetMapping("/count/station/{id}")
-    public ResponseEntity<Long> countByStationId(@PathVariable String id){
-        if(weatherRepository.existsByStation(id)){
-            return ResponseEntity.ok(weatherRepository.countByStation(id));
+    @GetMapping("/count/station/{station}")
+    public ResponseEntity<Long> countByStation(@PathVariable String station){
+        if(weatherRepository.existsByStation(station)){
+            return ResponseEntity.ok(weatherRepository.countByStation(station));
         }
         return ResponseEntity.badRequest().build();
     }

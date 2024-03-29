@@ -39,21 +39,21 @@ public class Weather {
 
     public Weather(String line) {
         String[] data = line.split(",");
-        this.station = data[0];
-        this.date = data[1];
-        this.source = data[2];
+        this.station = data[0].replaceAll("\"","");
+        this.date = data[1].replaceAll("\"","");
+        this.source = data[2].replaceAll("\"","");
         this.latitude = parseToFloat(data[3]);
         this.longitude = parseToFloat(data[4]);
         this.elevation = parseToFloat(data[5]);
-        this.name = data[6];
-        this.report_type = data[7];
-        this.call_sign = data[8];
-        this.quality_control = data[9];
-        this.wind = data[10];
+        this.name = data[6].replaceAll("\"","");
+        this.report_type = data[7].replaceAll("\"","");
+        this.call_sign = data[8].replaceAll("\"","");
+        this.quality_control = data[9].replaceAll("\"","");
+        this.wind = data[10].replaceAll("\"","");
         this.cig = parseToFloat(data[11]);
-        this.temperature = data[12];
-        this.dew = data[13];
-        this.slp = data[14];
+        this.temperature = data[12].replaceAll("\"","");
+        this.dew = data[13].replaceAll("\"","");
+        this.slp = data[14].replaceAll("\"","");
     }
 
     /**

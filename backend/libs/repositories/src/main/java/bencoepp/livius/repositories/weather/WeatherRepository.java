@@ -11,8 +11,6 @@ import java.util.List;
  * It provides the CRUD operations for managing Weather objects in a MongoDB database.
  */
 public interface WeatherRepository extends MongoRepository<Weather, String> {
-    List<Weather> findByDateNotNull(Pageable pageable);
-
     boolean existsByStation(String station);
 
     long countByStation(String station);
