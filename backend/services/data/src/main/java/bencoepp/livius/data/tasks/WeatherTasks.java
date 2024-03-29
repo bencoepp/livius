@@ -52,7 +52,7 @@ public class WeatherTasks {
 
         if(weatherRepository.count() != 0){
             String lastYear = findLastYearImported();
-            directories = directories.subList(directories.indexOf(lastYear), directories.size());
+            directories = directories.subList(directories.indexOf(lastYear + "/"), directories.size());
         }
 
         directories.forEach(directory -> {
