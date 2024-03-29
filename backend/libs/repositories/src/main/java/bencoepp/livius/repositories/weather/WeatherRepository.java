@@ -14,4 +14,8 @@ public interface WeatherRepository extends MongoRepository<Weather, String> {
     boolean existsByStation(String station);
 
     long countByStation(String station);
+
+    Weather findFirstByIdNotNullOrderByIdDesc();
+
+    long deleteByDateContains(String date);
 }

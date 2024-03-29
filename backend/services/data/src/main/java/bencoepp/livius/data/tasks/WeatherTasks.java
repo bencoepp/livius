@@ -51,19 +51,22 @@ public class WeatherTasks {
 
         if(weatherRepository.count() != 0){
             String lastYear = findLastYearImported();
-        }else{
-            directories.forEach(directory -> {
-                log.debug("Processing directory: " + directory);
-                downloadCsvFiles(directory);
-            });
+            directories = directories.subList(directories.indexOf(lastYear), directories.size());
         }
+
+        directories.forEach(directory -> {
+            log.debug("Processing directory: " + directory);
+            downloadCsvFiles(directory);
+        });
 
         log.info("Weather data finished importing");
     }
 
     private String findLastYearImported() {
-
-       return ";";
+        Weather last = weatherRepository.findFirstByIdNotNullOrderByIdDesc();
+        String date = last.getDate().split("-")[0];
+        weatherRepository.deleteByDateContains(date);
+        return date;
     }
 
     /**
