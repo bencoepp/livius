@@ -8,6 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 /**
  * The Weather class represents weather information.
  */
@@ -36,6 +39,11 @@ public class Weather {
     private String temperature;
     private String dew;
     private String slp;
+    private String citation;
+    private String accessDate;
+    private Instant created;
+    private Instant updated;
+    private String dataset_url;
 
     public Weather(String line) {
         String[] data = line.split(",");
