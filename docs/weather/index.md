@@ -17,7 +17,7 @@ as how data can be retrieved from the service.
 
 For all developers that want to use our api for their own apps as well as services please keep the following things in mind.
 All of our weather data is currently retrieved from the following source [NOAA Global Hourly Surface Data](https://www.dolthub.com/blog/2020-03-02-noaa-global-hourly-surface-data/).
-That means that you NEED to comply with there license as well as usage guidelines if you want to use any data outside of 
+That means that you NEED to comply with there license as well as usage guidelines if you want to use any data outside 
 the livius project. 
 
 When it comes to simple accessing the UI you do not need a user account. If you plan to use the api you do need one as to 
