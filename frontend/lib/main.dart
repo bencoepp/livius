@@ -40,8 +40,12 @@ class MyApp extends StatelessWidget {
       title: 'Livius',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          colorScheme: const ColorScheme.dark(
+              background: Color.fromARGB(255, 32, 32, 32),
+              primary: Color.fromARGB(255, 44, 182, 158),
+              primaryContainer: Color.fromARGB(255, 44, 44, 44)),
+          appBarTheme:
+              AppBarTheme(backgroundColor: Color.fromARGB(255, 32, 32, 32))),
       routerConfig: _router,
     );
   }
