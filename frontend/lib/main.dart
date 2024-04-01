@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/globe.dart';
 import 'package:frontend/screens/home.dart';
+import 'package:frontend/screens/settings.dart';
 import 'package:frontend/screens/timeline.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +27,12 @@ final GoRouter _router = GoRouter(
       path: '/globe',
       builder: (BuildContext context, GoRouterState state) {
         return const GlobePage();
+      },
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SettingsPage();
       },
     ),
   ],

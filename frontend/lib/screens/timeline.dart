@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/navdrawer.dart';
+import 'package:frontend/widgets/timeline/timeline_indicator.dart';
 
 class TimelinePage extends StatefulWidget {
   const TimelinePage({super.key});
@@ -20,17 +21,22 @@ class _TimelinePageState extends State<TimelinePage> {
           onPressed: () {},
           child: const Icon(Icons.settings),
         ),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                width: 160.0,
-                color: Colors.red,
+        body: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 75,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    width: 160.0,
+                    color: Colors.red,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const TimelineIndicator()
+          ],
         ));
   }
 }
