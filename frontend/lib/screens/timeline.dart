@@ -12,16 +12,21 @@ class _TimelinePageState extends State<TimelinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Timeline'),
-      ),
-      drawer: const NavDrawer(currentPage: '/timeline'),
-      body: const Center(
-        child: Text(
-          'Welcome to your Flutter base project!',
-          style: TextStyle(fontSize: 20.0),
+        appBar: AppBar(
+          title: const Text('Timeline'),
         ),
-      ),
-    );
+        drawer: const NavDrawer(currentPage: '/timeline'),
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Container(
+                width: 160.0,
+                color: Colors.red,
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -17,9 +17,12 @@ class _GlobePageState extends State<GlobePage> {
       ),
       drawer: const NavDrawer(currentPage: '/globe'),
       body: const Center(
-        child: Text(
-          'Welcome to your Flutter base project!',
-          style: TextStyle(fontSize: 20.0),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'The globe feature is currently under development and should not be used in any production enviorment.',
+            style: TextStyle(fontSize: 20.0),
+          ),
         ),
       ),
     );

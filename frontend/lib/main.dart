@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/globe.dart';
 import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/timeline.dart';
-import 'package:frontend/widgets/navdrawer.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
