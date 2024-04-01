@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
       title: 'Livius',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          useMaterial3: true,
           colorScheme: const ColorScheme.dark(
               background: Color.fromARGB(255, 32, 32, 32),
               primary: Color.fromARGB(255, 44, 182, 158),

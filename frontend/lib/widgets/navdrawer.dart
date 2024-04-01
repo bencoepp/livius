@@ -14,26 +14,39 @@ class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: ListView(
-      padding: EdgeInsets.zero,
+        child: Column(
       children: [
-        NavDrawerItem(
-          title: 'Home',
-          route: '/',
-          currentPage: widget.currentPage,
-          icon: Icons.home,
+        ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          children: [
+            NavDrawerItem(
+              title: 'Home',
+              route: '/',
+              currentPage: widget.currentPage,
+              icon: Icons.home,
+            ),
+            NavDrawerItem(
+              title: 'Timeline',
+              route: '/timeline',
+              currentPage: widget.currentPage,
+              icon: Icons.view_timeline_outlined,
+            ),
+            NavDrawerItem(
+              title: 'Globe',
+              route: '/globe',
+              currentPage: widget.currentPage,
+              icon: Icons.assistant_photo_outlined,
+            ),
+          ],
         ),
+        const Spacer(),
+        const Divider(),
         NavDrawerItem(
-          title: 'Timeline',
-          route: '/timeline',
+          title: 'Settings',
+          route: '/settings',
           currentPage: widget.currentPage,
-          icon: Icons.view_timeline_outlined,
-        ),
-        NavDrawerItem(
-          title: 'Globe',
-          route: '/globe',
-          currentPage: widget.currentPage,
-          icon: Icons.assistant_photo_outlined,
+          icon: Icons.settings,
         ),
       ],
     ));

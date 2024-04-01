@@ -16,6 +16,10 @@ class _TimelinePageState extends State<TimelinePage> {
           title: const Text('Timeline'),
         ),
         drawer: const NavDrawer(currentPage: '/timeline'),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.settings),
+        ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: ListView(
