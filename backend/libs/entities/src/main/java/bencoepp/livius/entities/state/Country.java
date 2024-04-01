@@ -56,9 +56,9 @@ public class Country {
     public static final String SEQUENCE_NAME="weather_seq";
     /**
      * Represents the unique identifier for a Country object.
-     *
+     * <p>
      * The value of id is annotated with @Id, indicating that it is the primary key for database operations.
-     *
+     * <p>
      * Note that the actual implementation or type of id is not specified in this documentation.
      *
      * @see Country
@@ -67,13 +67,13 @@ public class Country {
     private String id;
     /**
      * Represents the data for a cow.
-     *
+     * <p>
      * This variable stores information about a cow.
      * It can be used to indicate the presence or absence of cow data.
      * The value is of type Boolean, where true represents that cow data is available and false represents that cow data is not available.
-     *
+     * <p>
      * Example usage:
-     *
+     * <p>
      * boolean hasCowData = cow_data;
      * if (hasCowData) {
      *     // Process cow data
@@ -85,15 +85,15 @@ public class Country {
     /**
      * This is a private instance variable called "code" of type String.
      * It is used in the "Country" class.
-     *
+     * <p>
      * This variable represents the code associated with a country.
-     *
+     * <p>
      * Note: This documentation does not include example code, author or version tags.
      */
     private String code;
     /**
      * Represents the unique identifier of a cow.
-     *
+     * <p>
      * This variable is used to store the identification number of a cow.
      * The identification number is an integer value.
      */

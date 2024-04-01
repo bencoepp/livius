@@ -12,9 +12,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * (Create, Read, Update, Delete) required for database operations. It also allows for querying and sorting
  * data based on various criteria.
  * </p>
- *
- * @param <Country> the entity class representing a country
- * @param <String> the data type of the country id
  */
 public interface CountryRepository extends MongoRepository<Country, String> {
 }
