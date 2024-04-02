@@ -14,5 +14,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * </p>
  */
 public interface CountryRepository extends MongoRepository<Country, String> {
+    /**
+     * Checks if a country exists by code or cow ID.
+     *
+     * @param code   The country code to check.
+     * @param cowId  The cow ID to check.
+     * @return true if a country with the given code or cow ID exists, false otherwise.
+     */
     boolean existsByCodeOrCowId(String code, Integer cowId);
 }

@@ -138,7 +138,7 @@ public class State {
         this.name = data[2];
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.startDate = dateFormat.parse(data[5] + "." + data[4] + "." + data[3]);
-        this.endDate = dateFormat.parse(data[9] + "." + data[8] + "." + data[7]);
+        this.endDate = dateFormat.parse(data[8] + "." + data[7] + "." + data[6]);
         this.wasMajorPower = new ArrayList<>();
     }
 }

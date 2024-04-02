@@ -3,6 +3,8 @@ package bencoepp.livius.repositories.state;
 import bencoepp.livius.entities.state.State;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 /**
  * StateRepository is an interface that extends the MongoRepository interface. It is responsible for defining
  * the operations that can be performed on the "states" collection in the MongoDB database.
@@ -37,5 +39,15 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * the structure of the state documents in the database.
  */
 public interface StateRepository extends MongoRepository<State, String> {
+    /**
+     * Check if a state document exists in the "states" collection of the MongoDB database
+     * based on the given cowId and code.
+     *
+     * @param cowId the COW ID of the state to check
+     * @param code the code associated with the state to check
+     * @return true if a state document exists with the given cowId and code, false otherwise
+     */
     boolean existsByCowIdAndCode(Integer cowId, String code);
+
+    List<State> findByCowIdAndCode(Integer cowId, String code);
 }

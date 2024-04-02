@@ -2,8 +2,10 @@ package bencoepp.livius.data.tasks;
 
 import bencoepp.livius.data.events.COWFileDownloadedEvent;
 import bencoepp.livius.entities.state.Country;
+import bencoepp.livius.entities.state.MajorPower;
 import bencoepp.livius.entities.state.State;
 import bencoepp.livius.repositories.state.CountryRepository;
+import bencoepp.livius.repositories.state.MajorPowerRepository;
 import bencoepp.livius.repositories.state.StateRepository;
 import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
@@ -18,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.time.Instant;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
 
@@ -37,6 +40,8 @@ public class COWTasks {
     private CountryRepository countryRepository;
     @Autowired
     private StateRepository stateRepository;
+    @Autowired
+    private MajorPowerRepository majorPowerRepository;
 
     /**
      * This method is triggered when the application is ready to start importing data.
@@ -111,6 +116,8 @@ public class COWTasks {
         } catch (Exception e) {
             log.error("Error occurred while streaming CSV file content", e);
         }
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
     }
 
     /**
@@ -121,7 +128,7 @@ public class COWTasks {
     @EventListener(condition = "#event.file.equals('livius.cow.states.csv')")
     public void importStates(COWFileDownloadedEvent event){
         log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
-
+        stateRepository.deleteAll();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile()))) {
             bufferedReader.lines().forEach(line -> {
                 if(!line.contains(",ccode,statenme,")){
@@ -139,5 +146,41 @@ public class COWTasks {
         } catch (Exception e) {
             log.error("Error occurred while streaming CSV file content", e);
         }
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+        //for effekt we are going to execute the major power import a second time
+        importMajorPowers(new COWFileDownloadedEvent(this, "livius.cow.majors.csv"));
+    }
+
+    @EventListener(condition = "#event.file.equals('livius.cow.majors.csv')")
+    public void importMajorPowers(COWFileDownloadedEvent event){
+        log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+        majorPowerRepository.deleteAll();
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile()))) {
+            bufferedReader.lines().forEach(line -> {
+                if(!line.contains("stateabb,ccode,styear,stmonth,stday,endyear,endmonth,endday,version")){
+                    try {
+                        MajorPower power = new MajorPower(line);
+                        power.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
+                        power.setCreated(Instant.now());
+                        power.setUpdated(Instant.now());
+                        majorPowerRepository.save(power);
+
+                        List<State> states = stateRepository.findByCowIdAndCode(power.getCowId(), power.getState());
+                        for (State state : states){
+                            state.getWasMajorPower().add(power);
+                            stateRepository.save(state);
+                        }
+                    } catch (ParseException e) {
+                        log.error("Error occurred while creating a state instance", e);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            log.error("Error occurred while streaming CSV file content", e);
+        }
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
     }
 }
