@@ -177,6 +177,15 @@ public class COWTasks {
                         power.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
                         power.setCreated(Instant.now());
                         power.setUpdated(Instant.now());
+
+                        power.setAccessTime(Instant.now());
+                        power.setCitation("Correlates of War Project. 2017. “State System Membership List, v2016.” Online, http://correlatesofwar.org");
+                        power.setAuthors(new String[]{
+                                "Volker Krause, Eastern Michigan University",
+                                "Phil Schafer, University of Michigan",
+                                "Karen Ruth Adams, University of Montan"
+                        });
+                        power.setFaqEmail("vkrause@emich.edu");
                         majorPowerRepository.save(power);
 
                         List<State> states = stateRepository.findByCowIdAndCode(power.getCowId(), power.getState());

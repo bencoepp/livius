@@ -86,6 +86,10 @@ public class MajorPower {
     private Date endDate;
     private Instant created;
     private Instant updated;
+    private String citation;
+    private Instant accessTime;
+    private String[] authors;
+    private String faqEmail;
 
     public MajorPower(String csvLine) throws ParseException {
         String[] data = csvLine.split(",");
