@@ -130,7 +130,10 @@ public class State {
      * @see State#setUpdated(Instant)
      */
     private Instant updated;
-
+    private String citation;
+    private Instant accessTime;
+    private String[] authors;
+    private String faqEmail;
     public State(String csvLine) throws ParseException {
         String[] data = csvLine.split(",");
         this.code = data[0];

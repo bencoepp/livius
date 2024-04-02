@@ -109,6 +109,9 @@ public class COWTasks {
                         country.setId(sequenceGeneratorService.getSequenceNumber(Country.SEQUENCE_NAME));
                         country.setCreated(Instant.now());
                         country.setUpdated(Instant.now());
+
+                        country.setAccessTime(Instant.now());
+                        country.setUrl("https://correlatesofwar.org/data-sets/cow-country-codes-2/");
                         countryRepository.save(country);
                     }
                 }
@@ -137,6 +140,15 @@ public class COWTasks {
                         state.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
                         state.setCreated(Instant.now());
                         state.setUpdated(Instant.now());
+
+                        state.setAccessTime(Instant.now());
+                        state.setCitation("Correlates of War Project. 2017. “State System Membership List, v2016.” Online, http://correlatesofwar.org");
+                        state.setAuthors(new String[]{
+                                "Volker Krause, Eastern Michigan University",
+                                "Phil Schafer, University of Michigan",
+                                "Karen Ruth Adams, University of Montan"
+                        });
+                        state.setFaqEmail("vkrause@emich.edu");
                         stateRepository.save(state);
                     } catch (ParseException e) {
                         log.error("Error occurred while creating a state instance", e);

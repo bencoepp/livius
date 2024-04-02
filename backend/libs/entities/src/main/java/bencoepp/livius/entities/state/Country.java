@@ -137,6 +137,8 @@ public class Country {
      * @see Instant
      */
     private Instant updated;
+    private String url;
+    private Instant accessTime;
 
     public Country(String csvLine){
         String[] data = csvLine.split(",");
