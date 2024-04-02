@@ -99,14 +99,14 @@ public class State {
     private List<MajorPower> wasMajorPower;
     /**
      * The created field represents the creation timestamp of an object.
-     *
+     * <p>
      * This field is a private instance variable within the State class, which represents a state entity in a system.
      * It is used to store the timestamp when the state object was created.
-     *
+     * <p>
      * The created field is of type Instant. Instant is a class in the Java 8 Date-Time API that represents a point in time.
-     *
+     * <p>
      * The value of the created field is determined when the State object is instantiated and should not be modified afterwards.
-     *
+     * <p>
      * It is important to note that the created field is private, meaning it can only be accessed and modified by methods within the same class.
      * This promotes encapsulation and maintains data integrity.
      *
