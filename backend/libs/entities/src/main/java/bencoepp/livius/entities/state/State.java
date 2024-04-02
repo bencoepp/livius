@@ -34,25 +34,6 @@ public class State {
     @Id
     private String id;
     /**
-     * The cow_data variable represents the data associated with a cow.
-     * <p>
-     * This variable is a private instance variable within the State class. It is a Boolean type variable,
-     * which can only hold true or false values. The cow_data variable can be used to store information
-     * about whether or not a cow is available or present in the system.
-     * <p>
-     * The value of the cow_data variable will depend on the logic and requirements of the application.
-     * It can be accessed and modified within the State class using getter and setter methods.
-     * <p>
-     * It is important to note that this variable is defined in the State class, and its purpose and usage
-     * may vary depending on the context and functionality of the State class.
-     *
-     * @see State
-     * @see State#cow_data
-     * @see State#getCow_data()
-     * @see State#setCow_data(Boolean)
-     */
-    private Boolean cow_data;
-    /**
      * Represents a private variable in the State class.
      * <p>
      * This variable is of type String and holds a value that is not accessible outside the class it belongs to.
@@ -89,20 +70,6 @@ public class State {
      * System.out.println("End Date: " + endDate);
      */
     private Date end_date;
-    /**
-     * The cow_version variable represents the version of the COW (Correlates of War) dataset associated with a state.
-     * It is a private String field in the State class.
-     * <p>
-     * The cow_version indicates the specific version of the dataset that was used to collect and analyze data related to the state.
-     * This information is useful for tracking and managing changes in the dataset over time.
-     * <p>
-     * Example usage:
-     * State state = new State();
-     * String cow_version = state.getCow_version();
-     * <p>
-     * System.out.println("COW Version: " + cow_version);
-     */
-    private String cow_version;
     /**
      * Represents a list of MajorPower objects indicating whether a state was a major power.
      * <p>

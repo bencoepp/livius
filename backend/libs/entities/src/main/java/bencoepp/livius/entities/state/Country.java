@@ -66,23 +66,6 @@ public class Country {
     @Id
     private String id;
     /**
-     * Represents the data for a cow.
-     * <p>
-     * This variable stores information about a cow.
-     * It can be used to indicate the presence or absence of cow data.
-     * The value is of type Boolean, where true represents that cow data is available and false represents that cow data is not available.
-     * <p>
-     * Example usage:
-     * <p>
-     * boolean hasCowData = cow_data;
-     * if (hasCowData) {
-     *     // Process cow data
-     * } else {
-     *     // Handle case where cow data is not available
-     * }
-     */
-    private Boolean cow_data;
-    /**
      * This is a private instance variable called "code" of type String.
      * It is used in the "Country" class.
      * <p>

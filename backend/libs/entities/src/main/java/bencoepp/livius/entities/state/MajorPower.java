@@ -11,18 +11,18 @@ import java.sql.Date;
 
 /**
  * The MajorPower class represents a major power entity with the following properties:
- *
+ * <p>
  *  - id: the unique identifier of the major power
  *  - state: the state of the major power
  *  - start_date: the start date of the major power
  *  - end_date: the end date of the major power
  *  - cow_version: the version of the Correlates of War (COW) dataset
- *
+ * <p>
  * It also provides the getters and setters for these properties.
- *
+ * <p>
  * The class is annotated with @Document from the Spring Data MongoDB to specify the collection name "major_powers"
  * where the instances of MajorPower class will be stored in the MongoDB database.
- *
+ * <p>
  * The class also defines a static final field SEQUENCE_NAME to represent the name of the sequence used for generating
  * unique identifiers for major powers.
  */
@@ -56,10 +56,10 @@ public class MajorPower {
     private String state;
     /**
      * The start_date field represents the start date of a MajorPower instance.
-     *
+     * <p>
      * This field is part of the MajorPower class, which represents a major power entity in a system.
      * It is used to store the start date of a major power in the major_powers collection in a MongoDB database.
-     *
+     * <p>
      * This field is a private instance variable within the MajorPower class and should not be accessed directly.
      * Instead, use the getter and setter methods provided by the class to access and update the value of this field.
      *
@@ -80,18 +80,4 @@ public class MajorPower {
      * @see MajorPower#setEnd_date(Date)
      */
     private Date end_date;
-    /**
-     * Version of the Correlates of War (COW) dataset used by a MajorPower.
-     * The cow_version field represents the version of the COW dataset associated with a MajorPower.
-     * It provides information about the specific version of the dataset used by a MajorPower instance.
-     *
-     * This field is part of the MajorPower class, which represents a major power entity in a system.
-     * It is used to store the version of the COW dataset in the major_powers collection in a MongoDB database.
-     *
-     * This field is a private instance variable within the MajorPower class and should not be accessed directly.
-     * Instead, use the getter and setter methods provided by the class to access and update the value of this field.
-     *
-     * @see MajorPower
-     */
-    private String cow_version;
 }
