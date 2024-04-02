@@ -2,7 +2,9 @@ package bencoepp.livius.data.tasks;
 
 import bencoepp.livius.data.events.COWFileDownloadedEvent;
 import bencoepp.livius.entities.state.Country;
+import bencoepp.livius.entities.state.State;
 import bencoepp.livius.repositories.state.CountryRepository;
+import bencoepp.livius.repositories.state.StateRepository;
 import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
@@ -32,6 +35,8 @@ public class COWTasks {
     private ApplicationEventPublisher applicationEventPublisher;
     @Autowired
     private CountryRepository countryRepository;
+    @Autowired
+    private StateRepository stateRepository;
 
     /**
      * This method is triggered when the application is ready to start importing data.
@@ -100,6 +105,34 @@ public class COWTasks {
                         country.setCreated(Instant.now());
                         country.setUpdated(Instant.now());
                         countryRepository.save(country);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            log.error("Error occurred while streaming CSV file content", e);
+        }
+    }
+
+    /**
+     * Imports the states from a CSV file into the database.
+     *
+     * @param event the COWFileDownloadedEvent that contains the information about the downloaded file
+     */
+    @EventListener(condition = "#event.file.equals('livius.cow.states.csv')")
+    public void importStates(COWFileDownloadedEvent event){
+        log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile()))) {
+            bufferedReader.lines().forEach(line -> {
+                if(!line.contains(",ccode,statenme,")){
+                    try {
+                        State state = new State(line);
+                        state.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
+                        state.setCreated(Instant.now());
+                        state.setUpdated(Instant.now());
+                        stateRepository.save(state);
+                    } catch (ParseException e) {
+                        log.error("Error occurred while creating a state instance", e);
                     }
                 }
             });

@@ -37,4 +37,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * the structure of the state documents in the database.
  */
 public interface StateRepository extends MongoRepository<State, String> {
+    boolean existsByCowIdAndCode(Integer cowId, String code);
 }
