@@ -53,9 +53,9 @@ public class State {
      * @see State#setCode(String)
      */
     private String code;
-    private String cow_id;
+    private String cowId;
     private String name;
-    private Date start_date;
+    private Date startDate;
     /**
      * The end_date variable represents the end date of a state record.
      * It is a private Date field in the State class.
@@ -65,11 +65,11 @@ public class State {
      * <p>
      * Example usage:
      * State state = new State();
-     * Date endDate = state.getEnd_date();
+     * Date endDate = state.getEndDate();
      * <p>
      * System.out.println("End Date: " + endDate);
      */
-    private Date end_date;
+    private Date endDate;
     /**
      * Represents a list of MajorPower objects indicating whether a state was a major power.
      * <p>

@@ -14,4 +14,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * </p>
  */
 public interface CountryRepository extends MongoRepository<Country, String> {
+    boolean existsByCodeOrCowId(String code, Integer cowId);
 }

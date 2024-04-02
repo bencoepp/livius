@@ -80,7 +80,7 @@ public class Country {
      * This variable is used to store the identification number of a cow.
      * The identification number is an integer value.
      */
-    private Integer cow_id;
+    private Integer cowId;
     /**
      * The name of an entity.
      */
@@ -137,4 +137,13 @@ public class Country {
      * @see Instant
      */
     private Instant updated;
+
+    public Country(String csvLine){
+        String[] data = csvLine.split(",");
+        this.code = data[0];
+        this.cowId = Integer.valueOf(data[1]);
+        this.name = data[2];
+        this.created = Instant.now();
+        this.updated = Instant.now();
+    }
 }
