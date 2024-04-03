@@ -43,7 +43,7 @@ public class WeatherTasks {
      * For each subdirectory, it will download CSV files by calling the {@link #downloadCsvFiles(String)} method.
      */
     @EventListener(ApplicationReadyEvent.class)
-    public void importWeatherData(){
+    public void run(){
         log.info("Weather data import started");
 
         List<String> directories = getSubDirectories(BASE_URL);

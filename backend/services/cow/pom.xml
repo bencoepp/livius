@@ -11,7 +11,7 @@
     <properties>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
     </properties>
-    <artifactId>event</artifactId>
+    <artifactId>cow</artifactId>
 
     <dependencies>
         <dependency>

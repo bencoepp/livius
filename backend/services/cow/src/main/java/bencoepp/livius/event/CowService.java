@@ -18,9 +18,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableMongoRepositories(basePackages = "bencoepp.livius")
 @EnableDiscoveryClient
 @EnableFeignClients
-public class EventService {
+public class CowService {
     public static void main(String[] args) {
-        SpringApplication.run(EventService.class, args);
+        SpringApplication.run(CowService.class, args);
     }
 
 }

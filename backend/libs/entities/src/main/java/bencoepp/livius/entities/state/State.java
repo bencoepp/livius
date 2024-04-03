@@ -8,7 +8,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
-import java.sql.Date;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,9 +58,9 @@ public class State {
      * @see State#setCode(String)
      */
     private String code;
-    private String cow_id;
+    private Integer cowId;
     private String name;
-    private Date start_date;
+    private Date startDate;
     /**
      * The end_date variable represents the end date of a state record.
      * It is a private Date field in the State class.
@@ -65,11 +70,11 @@ public class State {
      * <p>
      * Example usage:
      * State state = new State();
-     * Date endDate = state.getEnd_date();
+     * Date endDate = state.getEndDate();
      * <p>
      * System.out.println("End Date: " + endDate);
      */
-    private Date end_date;
+    private Date endDate;
     /**
      * Represents a list of MajorPower objects indicating whether a state was a major power.
      * <p>
@@ -91,5 +96,52 @@ public class State {
      * }
      */
     @DocumentReference
-    List<MajorPower> wasMajorPower;
+    private List<MajorPower> wasMajorPower;
+    /**
+     * The created field represents the creation timestamp of an object.
+     * <p>
+     * This field is a private instance variable within the State class, which represents a state entity in a system.
+     * It is used to store the timestamp when the state object was created.
+     * <p>
+     * The created field is of type Instant. Instant is a class in the Java 8 Date-Time API that represents a point in time.
+     * <p>
+     * The value of the created field is determined when the State object is instantiated and should not be modified afterwards.
+     * <p>
+     * It is important to note that the created field is private, meaning it can only be accessed and modified by methods within the same class.
+     * This promotes encapsulation and maintains data integrity.
+     *
+     * @see State
+     * @see State#created
+     */
+    private Instant created;
+    /**
+     * The updated variable represents the timestamp when an object or entity was last updated.
+     * <p>
+     * This variable is an instance of the Instant class from the Java 8 Date-Time API.
+     * It holds the timestamp information in UTC (Coordinated Universal Time) format.
+     * The value of the updated variable can be retrieved and modified using the getter and setter methods.
+     * <p>
+     * The updated variable is private, meaning it can only be accessed and modified within the same class.
+     * This is done to ensure encapsulation and data integrity.
+     *
+     * @see State
+     * @see State#updated
+     * @see State#getUpdated()
+     * @see State#setUpdated(Instant)
+     */
+    private Instant updated;
+    private String citation;
+    private Instant accessTime;
+    private String[] authors;
+    private String faqEmail;
+    public State(String csvLine) throws ParseException {
+        String[] data = csvLine.split(",");
+        this.code = data[0];
+        this.cowId = Integer.valueOf(data[1]);
+        this.name = data[2];
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        this.startDate = dateFormat.parse(data[5] + "." + data[4] + "." + data[3]);
+        this.endDate = dateFormat.parse(data[8] + "." + data[7] + "." + data[6]);
+        this.wasMajorPower = new ArrayList<>();
+    }
 }
