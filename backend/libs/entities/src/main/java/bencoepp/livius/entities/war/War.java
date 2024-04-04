@@ -87,7 +87,7 @@ public class War {
     private List<State> sideB;
     private List<Date> startDates;
     private List<Date> endDates;
-    private String initiator;
+    private Boolean initiator;
     private Integer transTo;
     private Integer transFrom;
     /**
@@ -210,4 +210,25 @@ public class War {
      * @see War#setTotalNumberOfMonthsWarWasExperiencedByAllParticipants(Integer)
      */
     private Integer totalNumberOfMonthsWarWasExperiencedByAllParticipants;
+    private Boolean intervene;
+    private String location;
+    private String nonStateDeaths;
+
+    public War(String id, Integer cowId, String name, Integer type, List<State> sideA, List<State> sideB, List<Date> startDates, List<Date> endDates, Boolean initiator, Integer transTo, Integer transFrom, Integer outcome, Boolean intervene, String location, String nonStateDeaths) {
+        this.id = id;
+        this.cowId = cowId;
+        this.name = name;
+        this.type = type;
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.startDates = startDates;
+        this.endDates = endDates;
+        this.initiator = initiator;
+        this.transTo = transTo;
+        this.transFrom = transFrom;
+        this.outcome = outcome;
+        this.intervene = intervene;
+        this.location = location;
+        this.nonStateDeaths = nonStateDeaths;
+    }
 }

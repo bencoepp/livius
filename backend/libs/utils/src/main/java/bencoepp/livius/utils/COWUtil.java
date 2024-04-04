@@ -13,7 +13,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -54,5 +57,55 @@ public class COWUtil {
             Files.copy(in, Path.of(System.getProperty("user.dir") + DOWNLOAD_DIR + filename), StandardCopyOption.REPLACE_EXISTING);
             log.info("Downloaded file from {}", url);
         }
+    }
+
+    /**
+     * Parses the given day, month, and year strings and returns a Date object representing the corresponding date.
+     *
+     * @param day the day of the month as a string (e.g., "01", "02", ..., "31")
+     * @param month the month of the year as a string (e.g., "01", "02", ..., "12")
+     * @param year the year as a four-digit string (e.g., "2022")
+     * @return a Date object representing the parsed date
+     * @throws ParseException if the input strings cannot be parsed into a valid date
+     */
+    public Date getDateFromString(String day, String month, String year){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        try{
+            return dateFormat.parse(day + "." + month + "." + year);
+        }catch (Exception e){
+            log.error("An error happened while trying to convert the following date: " + day + "." + month + "." + year);
+            try {
+                return dateFormat.parse("01.01." + year);
+            } catch (ParseException ex) {
+                return new Date();
+            }
+        }
+    }
+
+    /**
+     * Checks if the given value is not equal to "-9" or "-8".
+     *
+     * @param value the value to be checked
+     * @return {@code true} if the value is not equal to "-9" or "-8", {@code false} otherwise
+     */
+    public Boolean checkIsNotUnknown(String value){
+        if(value.equals("-9")){
+            return false;
+        }else if(value.equals("-8")){
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Converts a string containing the values "0" or "1" into a Boolean value.
+     *
+     * @param bit the string to be converted
+     * @return true if the input string is "1", false if the input string is "0"
+     */
+    public Boolean convert0or1ToBoolean(String bit){
+        return !bit.equals("0");
     }
 }

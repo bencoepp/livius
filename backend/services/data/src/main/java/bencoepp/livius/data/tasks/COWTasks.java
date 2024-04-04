@@ -4,6 +4,9 @@ import bencoepp.livius.data.events.COWFileDownloadedEvent;
 import bencoepp.livius.entities.state.Country;
 import bencoepp.livius.entities.state.MajorPower;
 import bencoepp.livius.entities.state.State;
+import bencoepp.livius.entities.war.War;
+import bencoepp.livius.entities.war.WarOutcome;
+import bencoepp.livius.entities.war.WarType;
 import bencoepp.livius.repositories.state.CountryRepository;
 import bencoepp.livius.repositories.state.MajorPowerRepository;
 import bencoepp.livius.repositories.state.StateRepository;
@@ -20,6 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
@@ -164,6 +169,14 @@ public class COWTasks {
         importMajorPowers(new COWFileDownloadedEvent(this, "livius.cow.majors.csv"));
     }
 
+    /**
+     * Imports major powers from a CSV file.
+     *
+     * This method is called when a COWFileDownloadedEvent is triggered and the file name is equal to 'livius.cow.majors.csv'.
+     * It processes the CSV file and saves the MajorPower objects to the database.
+     *
+     * @param event the COWFileDownloadedEvent object representing the event triggered
+     */
     @EventListener(condition = "#event.file.equals('livius.cow.majors.csv')")
     public void importMajorPowers(COWFileDownloadedEvent event){
         log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
@@ -201,6 +214,103 @@ public class COWTasks {
         } catch (Exception e) {
             log.error("Error occurred while streaming CSV file content", e);
         }
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+    }
+
+    @EventListener(condition = "#event.file.equals('livius.cow.extra-state-war.csv')")
+    public void importExtraStateWars(COWFileDownloadedEvent event) {
+        log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile()))) {
+            bufferedReader.lines().forEach(line -> {
+                if(!line.contains("WarNum,WarName,WarType,ccode1,SideA,ccode2,SideB,StartMonth1,StartDay1,StartYear1,EndMonth1,EndDay1,EndYear1,StartMonth2,StartDay2,StartYear2,EndMonth2,EndDay2 ,EndYear2,Initiator,Interven,TransFrom,Outcome,TransTo,WhereFought,BatDeath,NonStateDeaths,Version")){
+                    String[] data = line.split(",");
+
+                    int warType = WarType.NONE.ordinal();
+
+                    if(data[2].equals("2")){
+                        warType = WarType.COLONIAL_WAR.ordinal();
+                    }else if(data[2].equals("3")){
+                        warType = WarType.IMPERIAL_WAR.ordinal();
+                    }
+
+                    List<State> sideA = new ArrayList<>();
+
+                    if(util.checkIsNotUnknown(data[3])){
+                        State state = stateRepository.findByCowId(Integer.valueOf(data[3]));
+                        if(state.getName().equals(data[4])){
+                            sideA.add(state);
+                        }else{
+                            //TODO if state name does not match create the state
+                        }
+                    }
+
+                    List<State> sideB = new ArrayList<>();
+
+                    if(util.checkIsNotUnknown(data[5])){
+                        State state = stateRepository.findByCowId(Integer.valueOf(data[3]));
+                        if(state.getName().equals(data[6])){
+                            sideA.add(state);
+                        }else{
+                            //TODO if state name does not match create the state
+                        }
+                    }
+
+                    List<Date> start = new ArrayList<>();
+
+                    start.add(util.getDateFromString(data[8], data[7], data[9]));
+                    if(util.checkIsNotUnknown(data[15])){
+                        start.add(util.getDateFromString(data[14], data[13], data[15]));
+                    }
+
+                    List<Date> end = new ArrayList<>();
+
+                    end.add(util.getDateFromString(data[11], data[10], data[12]));
+                    if(util.checkIsNotUnknown(data[18])){
+                        end.add(util.getDateFromString(data[17], data[16], data[18]));
+                    }
+
+                    Integer outcome = WarOutcome.CONTINUING.ordinal();
+                    Integer transFrom = 0;
+                    Integer transTo = 0;
+
+                    War war = new War(
+                            sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME),
+                            Integer.valueOf(data[0]),
+                            data[1],
+                            warType,
+                            sideA,
+                            sideB,
+                            start,
+                            end,
+                            util.convert0or1ToBoolean(data[19]),
+                            transTo,
+                            transFrom,
+                            outcome,
+                            util.convert0or1ToBoolean(data[20]),
+                            "",
+                            ""
+                    );
+                }
+            });
+        } catch (Exception e) {
+            log.error("Error occurred while streaming CSV file content", e);
+        }
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+    }
+
+    @EventListener(condition = "#event.file.equals('livius.cow.intra-state-war.zip')")
+    public void importIntraStateWars(COWFileDownloadedEvent event) {
+        log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+
+        log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
+    }
+
+    @EventListener(condition = "#event.file.equals('livius.cow.non-state-war')")
+    public void importNonStateWars(COWFileDownloadedEvent event) {
+        log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
 
         log.info("Finished processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
     }

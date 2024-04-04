@@ -50,4 +50,6 @@ public interface StateRepository extends MongoRepository<State, String> {
     boolean existsByCowIdAndCode(Integer cowId, String code);
 
     List<State> findByCowIdAndCode(Integer cowId, String code);
+
+    State findByCowId(Integer cowId);
 }
