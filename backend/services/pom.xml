@@ -21,6 +21,7 @@
         <module>gateway</module>
         <module>data</module>
         <module>weather</module>
+        <module>cow</module>
     </modules>
 
     <dependencies>
