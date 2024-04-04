@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -49,11 +50,24 @@ public class WeatherTasks {
         List<String> directories = getSubDirectories(BASE_URL);
         log.info("Number of years found: " + directories.size());
 
+        if(weatherRepository.count() != 0){
+            String lastYear = findLastYearImported();
+            directories = directories.subList(directories.indexOf(lastYear + "/"), directories.size());
+        }
+
         directories.forEach(directory -> {
             log.debug("Processing directory: " + directory);
             downloadCsvFiles(directory);
         });
+
         log.info("Weather data finished importing");
+    }
+
+    private String findLastYearImported() {
+        Weather last = weatherRepository.findFirstByIdNotNullOrderByIdDesc();
+        String date = last.getDate().split("-")[0];
+        weatherRepository.deleteByDateContains(date);
+        return date;
     }
 
     /**
@@ -91,7 +105,7 @@ public class WeatherTasks {
         log.debug("Processing CSV file: " + csvUrl);
         try (BufferedReader bufferedReader =
                      new BufferedReader(new InputStreamReader(new URL(csvUrl).openStream()))) {
-            bufferedReader.lines().forEach(line -> createAndSaveWeatherObject(line));
+            bufferedReader.lines().forEach(line -> createAndSaveWeatherObject(line, csvUrl));
         } catch (IOException e) {
             log.error("Error occurred while streaming CSV file content", e);
         }
@@ -103,7 +117,7 @@ public class WeatherTasks {
      *
      * @param line the line from which to create the Weather object
      */
-    private void createAndSaveWeatherObject(String line) {
+    private void createAndSaveWeatherObject(String line, String url) {
         if(line.contains("LATITUDE")){
             log.debug("Line contains 'LATITUDE'");
             return;
@@ -111,6 +125,11 @@ public class WeatherTasks {
         Weather weather = new Weather(line);
         weather.setId(sequenceGeneratorService.getSequenceNumber(Weather.SEQUENCE_NAME));
         log.debug("Created Weather object");
+        weather.setCreated(Instant.now());
+        weather.setUpdated(Instant.now());
+        weather.setAccessDate(Instant.now().toString());
+        weather.setCitation("NOAA National Centers for Environmental Information (2001): Global Surface Hourly [indicate subset used]. NOAA National Centers for Environmental Information. " + weather.getAccessDate());
+        weather.setDatasetUrl(url);
         weatherRepository.save(weather);
         log.debug("Weather object saved");
     }

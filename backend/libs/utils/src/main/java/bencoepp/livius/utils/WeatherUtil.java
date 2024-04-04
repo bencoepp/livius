@@ -9,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The WeatherUtil class provides utility methods for working with weather data.
@@ -61,5 +63,13 @@ public class WeatherUtil {
         Page<Weather> allCustomers = weatherRepository.findAll(pageRequest);
 
         return allCustomers.hasContent() ? allCustomers.getContent() : Collections.emptyList();
+    }
+
+    public Map<String, String> findAllStations(){
+        Map<String, String> output = new HashMap<>();
+
+        //TODO needs to be implemented
+
+        return output;
     }
 }

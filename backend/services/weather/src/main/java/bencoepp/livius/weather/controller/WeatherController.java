@@ -33,6 +33,16 @@ public class WeatherController {
     }
 
     /**
+     * Retrieves the total count of weather records.
+     *
+     * @return a ResponseEntity containing the total count of weather records
+     */
+    @GetMapping("/count/total")
+    public ResponseEntity<Long> countTotal(){
+        return ResponseEntity.ok(weatherRepository.count());
+    }
+
+    /**
      * Retrieves the weather information for a specific ID.
      *
      * @param id the ID of the weather information to retrieve
