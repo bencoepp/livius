@@ -129,7 +129,7 @@ public class WeatherTasks {
         weather.setUpdated(Instant.now());
         weather.setAccessDate(Instant.now().toString());
         weather.setCitation("NOAA National Centers for Environmental Information (2001): Global Surface Hourly [indicate subset used]. NOAA National Centers for Environmental Information. " + weather.getAccessDate());
-        weather.setDataset_url(url);
+        weather.setDatasetUrl(url);
         weatherRepository.save(weather);
         log.debug("Weather object saved");
     }
