@@ -1,5 +1,7 @@
 package bencoepp.livius.utils;
 
+import bencoepp.livius.entities.war.War;
+import bencoepp.livius.entities.war.WarOutcome;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -107,5 +109,24 @@ public class COWUtil {
      */
     public Boolean convert0or1ToBoolean(String bit){
         return !bit.equals("0");
+    }
+
+    /**
+     * Finds the outcome of a war based on the given code.
+     *
+     * @param outcome the code representing the war outcome
+     * @return the ordinal value of the war outcome
+     */
+    public Integer findWarOutcome(Integer outcome){
+        return switch (outcome) {
+            case 1 -> WarOutcome.SIDE_A_WIN.ordinal();
+            case 2 -> WarOutcome.SIDE_B_WIN.ordinal();
+            case 3 -> WarOutcome.COMPROMISE.ordinal();
+            case 4 -> WarOutcome.TRANSFORM_INTO_WAR.ordinal();
+            case 5 -> WarOutcome.CONTINUING.ordinal();
+            case 6 -> WarOutcome.STALEMATE.ordinal();
+            case 7 -> WarOutcome.CONTINUE_BELOW_WAR_LEVEL.ordinal();
+            default -> WarOutcome.NONE.ordinal();
+        };
     }
 }

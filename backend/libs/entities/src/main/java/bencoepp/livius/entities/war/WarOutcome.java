@@ -1,6 +1,7 @@
 package bencoepp.livius.entities.war;
 
 public enum WarOutcome {
+    NONE,
     SIDE_A_WIN,
     SIDE_B_WIN,
     COMPROMISE,

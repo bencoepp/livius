@@ -5,11 +5,11 @@ import bencoepp.livius.entities.state.Country;
 import bencoepp.livius.entities.state.MajorPower;
 import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.war.War;
-import bencoepp.livius.entities.war.WarOutcome;
 import bencoepp.livius.entities.war.WarType;
 import bencoepp.livius.repositories.state.CountryRepository;
 import bencoepp.livius.repositories.state.MajorPowerRepository;
 import bencoepp.livius.repositories.state.StateRepository;
+import bencoepp.livius.repositories.war.WarRepository;
 import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +47,8 @@ public class COWTasks {
     private StateRepository stateRepository;
     @Autowired
     private MajorPowerRepository majorPowerRepository;
+    @Autowired
+    private WarRepository warRepository;
 
     /**
      * This method is triggered when the application is ready to start importing data.
@@ -219,9 +221,9 @@ public class COWTasks {
     }
 
     @EventListener(condition = "#event.file.equals('livius.cow.extra-state-war.csv')")
-    public void importExtraStateWars(COWFileDownloadedEvent event) {
+    public void importExtraStateWars(COWFileDownloadedEvent event) throws InterruptedException {
         log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile());
-
+        wait(50000);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + event.getFile()))) {
             bufferedReader.lines().forEach(line -> {
                 if(!line.contains("WarNum,WarName,WarType,ccode1,SideA,ccode2,SideB,StartMonth1,StartDay1,StartYear1,EndMonth1,EndDay1,EndYear1,StartMonth2,StartDay2,StartYear2,EndMonth2,EndDay2 ,EndYear2,Initiator,Interven,TransFrom,Outcome,TransTo,WhereFought,BatDeath,NonStateDeaths,Version")){
@@ -271,10 +273,6 @@ public class COWTasks {
                         end.add(util.getDateFromString(data[17], data[16], data[18]));
                     }
 
-                    Integer outcome = WarOutcome.CONTINUING.ordinal();
-                    Integer transFrom = 0;
-                    Integer transTo = 0;
-
                     War war = new War(
                             sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME),
                             Integer.valueOf(data[0]),
@@ -285,13 +283,16 @@ public class COWTasks {
                             start,
                             end,
                             util.convert0or1ToBoolean(data[19]),
-                            transTo,
-                            transFrom,
-                            outcome,
+                            Integer.valueOf(data[23]),
+                            Integer.valueOf(data[21]),
+                            util.findWarOutcome(Integer.valueOf(data[22])),
                             util.convert0or1ToBoolean(data[20]),
-                            "",
-                            ""
+                            data[24],
+                            data[26],
+                            Long.valueOf(data[25])
                     );
+
+                    warRepository.save(war);
                 }
             });
         } catch (Exception e) {
