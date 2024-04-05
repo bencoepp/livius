@@ -22,6 +22,12 @@ import java.util.List;
 
 import static bencoepp.livius.utils.COWUtil.DOWNLOAD_DIR;
 
+/**
+ * The MajorStateTask class extends the Task class and represents a task that executes a job when a JobEvent
+ * is triggered with the condition "livius.cow.majors.csv". It reads a CSV file, creates MajorPower and State
+ * instances, and saves them to the database. It checks for dependencies that are not finished executing and
+ * waits until they are finished before running the job.
+ */
 @Component
 @Slf4j
 public class MajorStateTask extends Task {
@@ -35,6 +41,13 @@ public class MajorStateTask extends Task {
     @Autowired
     private MajorPowerRepository majorPowerRepository;
 
+    /**
+     * Executes the job when a JobEvent is triggered with the condition "livius.cow.majors.csv".
+     * This method reads a CSV file, creates MajorPower and State instances, and saves them to the database.
+     * If there are any dependencies that are not finished executing, the method will wait until they are finished.
+     *
+     * @param event The JobEvent triggering the execution of the job.
+     */
     @Override
     @EventListener(condition = "#event.condition.equals('livius.cow.majors.csv')")
     public void run(JobEvent event) {

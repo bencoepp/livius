@@ -36,8 +36,18 @@ public class War {
     private String id;
     private Integer cowId;
     private String name;
-    private Integer type;
-    private Integer region;
+    private String type;
+    public static final String TYPE_NONE = "none";
+    public static final String TYPE_COLONIAL_WAR = "colonial_war";
+    public static final String TYPE_IMPERIAL_WAR = "imperial_war";
+    private String region;
+    public static final String REGION_NORTH_AMERICA = "north_america";
+    public static final String REGION_SOUTH_AMERICA = "south_america";
+    public static final String REGION_EUROPE = "europe";
+    public static final String REGION_SUB_SAHARAN_AFRIKA = "sub_saharan_afrika";
+    public static final String REGION_MIDDLE_EAST = "middle_east";
+    public static final String REGION_NORTH_AFRIKA = "north_afrika";
+    public static final String REGION_ASIA_AND_OCEANIA = "asia_and_oceania";
     /**
      * The sideA variable represents a list of State objects.
      * <p>
@@ -90,26 +100,15 @@ public class War {
     private Boolean initiator;
     private Integer transTo;
     private Integer transFrom;
-    /**
-     * The outcome variable represents the outcome of a war.
-     *
-     * This variable is of type Integer and holds a value that represents the outcome of a war.
-     * It is used to indicate the result or outcome of a war, such as victory, defeat, or a stalemate.
-     *
-     * It is recommended to use the getter and setter methods provided by the class to access or modify the value of this variable.
-     *
-     * Example usage:
-     * ```
-     * War war = new War();
-     * war.setOutcome(1);
-     * Integer outcome = war.getOutcome();
-     * ```
-     *
-     * @see War
-     * @see War#getOutcome()
-     * @see War#setOutcome(Integer)
-     */
-    private Integer outcome;
+    private String outcome;
+    public static final String OUTCOME_NONE = "none";
+    public static final String OUTCOME_SIDE_A_WIN = "side_a_win";
+    public static final String OUTCOME_SIDE_B_WIN = "side_b_win";
+    public static final String OUTCOME_COMPROMISE = "compromise";
+    public static final String OUTCOME_TRANSFORM_INTO_WAR = "transform_into_war";
+    public static final String OUTCOME_CONTINUING = "continuing";
+    public static final String OUTCOME_STALEMATE = "stalemate";
+    public static final String OUTCOME_CONTINUE_BELOW_WAR_LEVEL = "continue_below_war_level";
     /**
      * The sideADeaths variable represents the number of deaths on side A in a war.
      * <p>
@@ -211,10 +210,9 @@ public class War {
      */
     private Integer totalNumberOfMonthsWarWasExperiencedByAllParticipants;
     private Boolean intervene;
-    private String location;
     private String nonStateDeaths;
 
-    public War(String id, Integer cowId, String name, Integer type, List<State> sideA, List<State> sideB, List<Date> startDates, List<Date> endDates, Boolean initiator, Integer transTo, Integer transFrom, Integer outcome, Boolean intervene, String location, String nonStateDeaths, Long battleDeaths) {
+    public War(String id, Integer cowId, String name, String type, List<State> sideA, List<State> sideB, List<Date> startDates, List<Date> endDates, Boolean initiator, Integer transTo, Integer transFrom, String outcome, Boolean intervene, String region, String nonStateDeaths, Long battleDeaths) {
         this.id = id;
         this.cowId = cowId;
         this.name = name;
@@ -228,7 +226,7 @@ public class War {
         this.transFrom = transFrom;
         this.outcome = outcome;
         this.intervene = intervene;
-        this.location = location;
+        this.region = region;
         this.nonStateDeaths = nonStateDeaths;
         this.totalCompatDeaths = battleDeaths;
     }

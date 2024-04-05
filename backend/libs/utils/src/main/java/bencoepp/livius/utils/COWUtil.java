@@ -1,7 +1,6 @@
 package bencoepp.livius.utils;
 
 import bencoepp.livius.entities.war.War;
-import bencoepp.livius.entities.war.WarOutcome;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -9,7 +8,6 @@ import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -22,6 +20,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * This class provides utility methods for working with COW (Correlates of War) data.
+ */
 @Service
 @Slf4j
 public class COWUtil {
@@ -117,16 +118,16 @@ public class COWUtil {
      * @param outcome the code representing the war outcome
      * @return the ordinal value of the war outcome
      */
-    public Integer findWarOutcome(Integer outcome){
+    public String findWarOutcome(Integer outcome){
         return switch (outcome) {
-            case 1 -> WarOutcome.SIDE_A_WIN.ordinal();
-            case 2 -> WarOutcome.SIDE_B_WIN.ordinal();
-            case 3 -> WarOutcome.COMPROMISE.ordinal();
-            case 4 -> WarOutcome.TRANSFORM_INTO_WAR.ordinal();
-            case 5 -> WarOutcome.CONTINUING.ordinal();
-            case 6 -> WarOutcome.STALEMATE.ordinal();
-            case 7 -> WarOutcome.CONTINUE_BELOW_WAR_LEVEL.ordinal();
-            default -> WarOutcome.NONE.ordinal();
+            case 1 -> War.OUTCOME_SIDE_A_WIN;
+            case 2 ->War.OUTCOME_SIDE_B_WIN;
+            case 3 -> War.OUTCOME_COMPROMISE;
+            case 4 -> War.OUTCOME_TRANSFORM_INTO_WAR;
+            case 5 -> War.OUTCOME_CONTINUING;
+            case 6 -> War.OUTCOME_STALEMATE;
+            case 7 -> War.OUTCOME_CONTINUE_BELOW_WAR_LEVEL;
+            default -> War.OUTCOME_NONE;
         };
     }
 }
