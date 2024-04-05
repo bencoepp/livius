@@ -40,10 +40,16 @@ public class War {
     public static final String TYPE_NONE = "none";
     public static final String TYPE_COLONIAL_WAR = "colonial_war";
     public static final String TYPE_IMPERIAL_WAR = "imperial_war";
+    public static final String TYPE_WARS_BETWEEN_NON_STATE_IN_NON_STATE_TERRITORY = "wars_between_non_state_in_non_state_territory";
+    public static final String TYPE_WARS_BETWEEN_NSA_ACROSS_BORDER = "wars_between_nsa_across_border";
     private String region;
     public static final String REGION_NORTH_AMERICA = "north_america";
+    public static final String REGION_WEST_HEMISPHERE = "west_hemisphere";
     public static final String REGION_SOUTH_AMERICA = "south_america";
     public static final String REGION_EUROPE = "europe";
+    public static final String REGION_AFRIKA = "afrika";
+    public static final String REGION_ASIA = "asia";
+    public static final String REGION_OCEANIA = "oceania";
     public static final String REGION_SUB_SAHARAN_AFRIKA = "sub_saharan_afrika";
     public static final String REGION_MIDDLE_EAST = "middle_east";
     public static final String REGION_NORTH_AFRIKA = "north_afrika";
@@ -211,23 +217,5 @@ public class War {
     private Integer totalNumberOfMonthsWarWasExperiencedByAllParticipants;
     private Boolean intervene;
     private String nonStateDeaths;
-
-    public War(String id, Integer cowId, String name, String type, List<State> sideA, List<State> sideB, List<Date> startDates, List<Date> endDates, Boolean initiator, Integer transTo, Integer transFrom, String outcome, Boolean intervene, String region, String nonStateDeaths, Long battleDeaths) {
-        this.id = id;
-        this.cowId = cowId;
-        this.name = name;
-        this.type = type;
-        this.sideA = sideA;
-        this.sideB = sideB;
-        this.startDates = startDates;
-        this.endDates = endDates;
-        this.initiator = initiator;
-        this.transTo = transTo;
-        this.transFrom = transFrom;
-        this.outcome = outcome;
-        this.intervene = intervene;
-        this.region = region;
-        this.nonStateDeaths = nonStateDeaths;
-        this.totalCompatDeaths = battleDeaths;
-    }
+    private Boolean nonStateWar;
 }

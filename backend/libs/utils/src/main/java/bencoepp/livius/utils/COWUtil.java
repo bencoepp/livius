@@ -1,6 +1,8 @@
 package bencoepp.livius.utils;
 
+import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.war.War;
+import bencoepp.livius.repositories.state.StateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -29,7 +31,10 @@ public class COWUtil {
 
     @Autowired
     private ConfigurableApplicationContext applicationContext;
-
+    @Autowired
+    private StateRepository stateRepository;
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
     public static final String DOWNLOAD_DIR = "/cow/data/";
 
     /**
@@ -112,6 +117,16 @@ public class COWUtil {
     }
 
     /**
+     * Checks if the given value is equal to "A".
+     *
+     * @param value the string value to be checked
+     * @return true if the value is not equal to "A", false otherwise
+     */
+    public Boolean initiatorIsA(String value){
+        return !value.equals("A");
+    }
+
+    /**
      * Finds the outcome of a war based on the given code.
      *
      * @param outcome the code representing the war outcome
@@ -128,5 +143,23 @@ public class COWUtil {
             case 7 -> War.OUTCOME_CONTINUE_BELOW_WAR_LEVEL;
             default -> War.OUTCOME_NONE;
         };
+    }
+
+    /**
+     * Creates a non-state entity with the given name.
+     *
+     * @param name the name of the entity to be created
+     * @return the created entity if it already exists in the state repository, otherwise a new state entity is created and saved to the repository
+     */
+    public State createNonStateEntity(String name){
+        if(stateRepository.existsByName(name)){
+            return stateRepository.findByName(name);
+        }else{
+            State state = new State();
+            state.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
+            state.setName(name);
+            return stateRepository.save(state);
+        }
+
     }
 }

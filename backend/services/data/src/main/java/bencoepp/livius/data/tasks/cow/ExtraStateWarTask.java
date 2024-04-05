@@ -65,65 +65,54 @@ public class ExtraStateWarTask extends Task {
                 bufferedReader.lines().forEach(line -> {
                     if(!line.contains("WarNum,WarName,WarType,ccode1,SideA,ccode2,SideB,StartMonth1,StartDay1,StartYear1,EndMonth1,EndDay1,EndYear1,StartMonth2,StartDay2,StartYear2,EndMonth2,EndDay2 ,EndYear2,Initiator,Interven,TransFrom,Outcome,TransTo,WhereFought,BatDeath,NonStateDeaths,Version")){
                         String[] data = line.split(",");
-
-                        String warType = War.TYPE_NONE;
+                        War war = new War();
+                        war.setId(sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME));
 
                         if(data[2].equals("2")){
-                            warType = War.TYPE_COLONIAL_WAR;
+                            war.setType(War.TYPE_COLONIAL_WAR);
                         }else if(data[2].equals("3")){
-                            warType = War.TYPE_IMPERIAL_WAR;
+                            war.setType(War.TYPE_IMPERIAL_WAR);
+                        }else{
+                            war.setType(War.TYPE_NONE);
                         }
 
-                        List<State> sideA = new ArrayList<>();
-
+                        war.setSideA(new ArrayList<>());
                         if(util.checkIsNotUnknown(data[3])){
-                            List<State> states = stateRepository.findByCowIdAndName(Integer.valueOf(data[3]), data[4]);
-                            sideA.addAll(states);
+                            List<State> states = stateRepository.findByCowId(Integer.valueOf(data[3]));
+                            war.getSideA().addAll(states);
                         }
 
-                        List<State> sideB = new ArrayList<>();
-
+                        war.setSideB(new ArrayList<>());
                         if(util.checkIsNotUnknown(data[5])){
-                            try{
-                                List<State> states = stateRepository.findByCowIdAndName(Integer.valueOf(data[5]), data[6]);
-                                sideA.addAll(states);
-                            }catch (NumberFormatException e){
-                                log.error("Exception was through for the following item: id->" + data[5] + " name->" + data[6]);
-                            }
+                            List<State> states = stateRepository.findByCowId(Integer.valueOf(data[5]));
+                            war.getSideB().addAll(states);
                         }
 
-                        List<Date> start = new ArrayList<>();
+                        war.setStartDates(new ArrayList<>());
+                        war.getStartDates().add(util.getDateFromString(data[8], data[7], data[9]));
+                        war.getStartDates().add(util.getDateFromString(data[14], data[13], data[15]));
 
-                        start.add(util.getDateFromString(data[8], data[7], data[9]));
-                        if(util.checkIsNotUnknown(data[15])){
-                            start.add(util.getDateFromString(data[14], data[13], data[15]));
+                        war.setEndDates(new ArrayList<>());
+                        war.getEndDates().add(util.getDateFromString(data[11], data[10], data[12]));
+                        war.getEndDates().add(util.getDateFromString(data[17], data[16], data[18]));
+
+                        war.setInitiator(util.convert0or1ToBoolean(data[19]));
+                        war.setIntervene(util.convert0or1ToBoolean(data[20]));
+                        war.setTransFrom(Integer.valueOf(data[21]));
+                        war.setOutcome(util.findWarOutcome(Integer.valueOf(data[22])));
+                        war.setTransTo(Integer.valueOf(data[23]));
+
+                        switch (data[24]) {
+                            case "1" -> war.setRegion(War.REGION_WEST_HEMISPHERE);
+                            case "2" -> war.setRegion(War.REGION_EUROPE);
+                            case "4" -> war.setRegion(War.REGION_AFRIKA);
+                            case "6" -> war.setRegion(War.REGION_MIDDLE_EAST);
+                            case "7" -> war.setRegion(War.REGION_ASIA);
+                            case "9" -> war.setRegion(War.REGION_OCEANIA);
                         }
 
-                        List<Date> end = new ArrayList<>();
-
-                        end.add(util.getDateFromString(data[11], data[10], data[12]));
-                        if(util.checkIsNotUnknown(data[18])){
-                            end.add(util.getDateFromString(data[17], data[16], data[18]));
-                        }
-
-                        War war = new War(
-                                sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME),
-                                Integer.valueOf(data[0]),
-                                data[1],
-                                warType,
-                                sideA,
-                                sideB,
-                                start,
-                                end,
-                                util.convert0or1ToBoolean(data[19]),
-                                Integer.valueOf(data[23]),
-                                Integer.valueOf(data[21]),
-                                util.findWarOutcome(Integer.valueOf(data[22])),
-                                util.convert0or1ToBoolean(data[20]),
-                                data[24],
-                                data[26],
-                                Long.valueOf(data[25])
-                        );
+                        war.setTotalCompatDeaths(Long.valueOf(data[25]));
+                        war.setNonStateDeaths(data[26]);
 
                         warRepository.save(war);
                     }
