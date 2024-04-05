@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -151,15 +152,32 @@ public class COWUtil {
      * @param name the name of the entity to be created
      * @return the created entity if it already exists in the state repository, otherwise a new state entity is created and saved to the repository
      */
-    public State createNonStateEntity(String name){
+    public List<State> createNonStateEntity(String name){
         if(stateRepository.existsByName(name)){
             return stateRepository.findByName(name);
         }else{
             State state = new State();
             state.setId(sequenceGeneratorService.getSequenceNumber(State.SEQUENCE_NAME));
             state.setName(name);
-            return stateRepository.save(state);
+            return Collections.singletonList(stateRepository.save(state));
         }
+    }
 
+    /**
+     * Checks if the given string is numeric.
+     *
+     * @param strNum the string to be checked
+     * @return true if the string is numeric, false otherwise
+     */
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

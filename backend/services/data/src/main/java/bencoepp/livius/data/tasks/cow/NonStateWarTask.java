@@ -78,6 +78,7 @@ public class NonStateWarTask extends Task {
 
                         War war = new War();
                         war.setId(sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME));
+                        war.setName(data[1]);
 
                         if(data[2].equals("8")){
                             war.setType(War.TYPE_WARS_BETWEEN_NON_STATE_IN_NON_STATE_TERRITORY);
@@ -100,27 +101,27 @@ public class NonStateWarTask extends Task {
 
                         war.setSideA(new ArrayList<>());
                         if(!data[4].isBlank()){
-                            war.getSideA().add(util.createNonStateEntity(data[4]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[4]));
                         }
                         if(util.checkIsNotUnknown(data[5])){
-                            war.getSideA().add(util.createNonStateEntity(data[5]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[5]));
                         }
 
                         war.setSideB(new ArrayList<>());
                         if(!data[6].isBlank()){
-                            war.getSideA().add(util.createNonStateEntity(data[6]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[6]));
                         }
                         if(util.checkIsNotUnknown(data[7])){
-                            war.getSideA().add(util.createNonStateEntity(data[7]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[7]));
                         }
                         if(util.checkIsNotUnknown(data[8])){
-                            war.getSideA().add(util.createNonStateEntity(data[8]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[8]));
                         }
                         if(util.checkIsNotUnknown(data[9])){
-                            war.getSideA().add(util.createNonStateEntity(data[9]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[9]));
                         }
                         if(util.checkIsNotUnknown(data[10])){
-                            war.getSideA().add(util.createNonStateEntity(data[10]));
+                            war.getSideA().addAll(util.createNonStateEntity(data[10]));
                         }
 
                         war.setStartDates(new ArrayList<>());
@@ -135,7 +136,7 @@ public class NonStateWarTask extends Task {
                         war.setOutcome(util.findWarOutcome(Integer.valueOf(data[20])));
                         war.setSideADeaths(Long.valueOf(data[21]));
                         war.setSideBDeaths(Long.valueOf(data[22]));
-                        war.setTotalCompatDeaths(Long.valueOf(data[23]));
+                        war.setTotalCompatDeaths(Long.valueOf(data[23].replaceAll("\"","")));
 
                         warRepository.save(war);
                     }

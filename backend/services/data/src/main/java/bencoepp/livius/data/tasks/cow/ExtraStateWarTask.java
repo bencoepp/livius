@@ -67,6 +67,7 @@ public class ExtraStateWarTask extends Task {
                         String[] data = line.split(",");
                         War war = new War();
                         war.setId(sequenceGeneratorService.getSequenceNumber(War.SEQUENCE_NAME));
+                        war.setName(data[1]);
 
                         if(data[2].equals("2")){
                             war.setType(War.TYPE_COLONIAL_WAR);
@@ -77,13 +78,14 @@ public class ExtraStateWarTask extends Task {
                         }
 
                         war.setSideA(new ArrayList<>());
-                        if(util.checkIsNotUnknown(data[3])){
+                        if(util.checkIsNotUnknown(data[3]) && util.isNumeric(data[3])){
+
                             List<State> states = stateRepository.findByCowId(Integer.valueOf(data[3]));
                             war.getSideA().addAll(states);
                         }
 
                         war.setSideB(new ArrayList<>());
-                        if(util.checkIsNotUnknown(data[5])){
+                        if(util.checkIsNotUnknown(data[5]) && util.isNumeric(data[5])){
                             List<State> states = stateRepository.findByCowId(Integer.valueOf(data[5]));
                             war.getSideB().addAll(states);
                         }

@@ -57,5 +57,5 @@ public interface StateRepository extends MongoRepository<State, String> {
 
     boolean existsByName(String name);
 
-    State findByName(String name);
+    List<State> findByName(String name);
 }
