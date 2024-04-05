@@ -11,6 +11,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import java.io.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -47,22 +48,23 @@ public class COWTasks {
 
                 List<String> dependencies = new ArrayList<>();
                 if(key.equals("livius.cow.majors")){
-                    dependencies.add("livius.cow.states");
+                    dependencies.add("livius.cow.states.csv");
                 }
 
                 if(key.equals("livius.cow.non-state-war") || key.equals("livius.cow.intra-state-war") || key.equals("livius.cow.extra-state-war")){
-                    dependencies.add("livius.cow.states");
+                    dependencies.add("livius.cow.states.csv");
                 }
 
                 Job job = new Job(
                         sequenceGeneratorService.getSequenceNumber(Job.SEQUENCE_NAME),
-                        key,
+                        file,
                         value,
                         Job.TYPE_COW,
                         Job.STATUS_SCHEDULED,
-                        dependencies
+                        dependencies,
+                        Instant.now()
                 );
-                if(!jobRepository.existsByName(key)){
+                if(!jobRepository.existsByName(file)){
                     jobRepository.save(job);
                 }
             } catch (IOException e) {

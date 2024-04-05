@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -38,4 +39,17 @@ public class Job {
     @Transient
     public static final String STATUS_ERROR = "error";
     private List<String> dependencies;
+    private Instant created;
+    private Instant started;
+    private Instant finished;
+
+    public Job(String id, String name, String url, String type, String status, List<String> dependencies, Instant created) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.type = type;
+        this.status = status;
+        this.dependencies = dependencies;
+        this.created = created;
+    }
 }
