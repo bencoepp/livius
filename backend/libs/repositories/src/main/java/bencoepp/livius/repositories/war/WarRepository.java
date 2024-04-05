@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * The WarRepository interface provides CRUD operations for the War class in the MongoDB database.
  * It extends the MongoRepository interface, which is part of the Spring Data MongoDB framework.
  * The MongoRepository interface provides methods for querying and manipulating data in the MongoDB database.
- *
+ * <p>
  * This interface does not define any additional methods because it inherits all the necessary methods from the MongoRepository interface.
- *
+ * <p>
  * Example usage:
  * ```
  * WarRepository warRepository = new WarRepositoryImpl();
@@ -18,10 +18,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * war.setType(2);
  * war.setRegion(3);
  * warRepository.save(war);
- *
+ * <p>
  * String warId = war.getId();
  * Optional<War> retrievedWar = warRepository.findById(warId);
- *
+ * <p>
  * retrievedWar.ifPresent(w -> {
  *     System.out.println("Name: " + w.getName());
  *     System.out.println("Type: " + w.getType());

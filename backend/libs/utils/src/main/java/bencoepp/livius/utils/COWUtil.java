@@ -69,7 +69,6 @@ public class COWUtil {
      * @param month the month of the year as a string (e.g., "01", "02", ..., "12")
      * @param year the year as a four-digit string (e.g., "2022")
      * @return a Date object representing the parsed date
-     * @throws ParseException if the input strings cannot be parsed into a valid date
      */
     public Date getDateFromString(String day, String month, String year){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The War class represents a war document in the "wars" collection of a MongoDB database.
  * It contains various properties that describe the characteristics of a war.
- *
+ * <p>
  * This class is annotated with the following annotations:
  * - @Getter: Generates getter methods for all non-static fields of the class.
  * - @Setter: Generates setter methods for all non-static fields of the class.

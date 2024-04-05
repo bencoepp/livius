@@ -1,7 +1,6 @@
 package bencoepp.livius.data.tasks;
 
 import bencoepp.livius.entities.job.Job;
-import bencoepp.livius.data.events.JobEvent;
 import bencoepp.livius.repositories.job.JobRepository;
 import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
