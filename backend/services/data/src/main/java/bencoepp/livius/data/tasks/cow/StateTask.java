@@ -29,6 +29,7 @@ public class StateTask extends Task {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
     private Job job;
+    @Autowired
     private StateRepository stateRepository;
 
     /**
@@ -42,7 +43,11 @@ public class StateTask extends Task {
     public void run(JobEvent event) {
         job = jobRepository.findById(event.getJobId()).get();
         job.setStatus(Job.STATUS_EXECUTING);
+        job.setStarted(Instant.now());
+        jobRepository.save(job);
+
         log.info("Processing CSV file {}", System.getProperty("user.dir") + DOWNLOAD_DIR + job.getName());
+
         stateRepository.deleteAll();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + job.getName()))) {
             bufferedReader.lines().forEach(line -> {
