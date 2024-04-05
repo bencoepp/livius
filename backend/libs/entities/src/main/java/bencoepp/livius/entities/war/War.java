@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +44,10 @@ public class War {
     public static final String TYPE_IMPERIAL_WAR = "imperial_war";
     public static final String TYPE_WARS_BETWEEN_NON_STATE_IN_NON_STATE_TERRITORY = "wars_between_non_state_in_non_state_territory";
     public static final String TYPE_WARS_BETWEEN_NSA_ACROSS_BORDER = "wars_between_nsa_across_border";
+    public static final String TYPE_CIVIL_WAR_FOR_CENTRAL_CONTROL = "civil_war_for_central_control";
+    public static final String TYPE_CIVIL_WAR_OVER_LOCAL_ISSUE = "civil_war_over_local_issue";
+    public static final String TYPE_REGIONAL_INTERNAL = "regional_internal";
+    public static final String TYPE_INTERCOMMUNAL = "intercommunal";
     private String region;
     public static final String REGION_NORTH_AMERICA = "north_america";
     public static final String REGION_WEST_HEMISPHERE = "west_hemisphere";
@@ -179,29 +185,8 @@ public class War {
      * @see War#setTotalCompatDeaths(Long)
      */
     private Long totalCompatDeaths;
-    /**
-     * The numberOfDaysTheWarLasted variable represents the duration of a war in days.
-     * <p>
-     * This variable is of type Integer and holds the number of days that the war lasted. It is a measure of the duration of the war.
-     * <p>
-     * It is recommended to use the getter and setter methods provided by the War class to access or modify the value of this variable.
-     *
-     * @see War#getNumberOfDaysTheWarLasted()
-     * @see War#setNumberOfDaysTheWarLasted(Integer)
-     */
-    private Integer numberOfDaysTheWarLasted;
-    /**
-     * The numberOfMonthsTheWarLasted variable represents the duration of a war in months.
-     * <p>
-     * This variable is of type Integer and holds the number of months that the war lasted. It is a measure of the duration of the war.
-     * <p>
-     * It is recommended to use the getter and setter methods provided by the War class to access or modify the value of this variable.
-     *
-     * @see War
-     * @see War#getNumberOfMonthsTheWarLasted()
-     * @see War#setNumberOfMonthsTheWarLasted(Integer)
-     */
-    private Integer numberOfMonthsTheWarLasted;
+    private String numberOfDaysTheWarLasted;
+    private String numberOfMonthsTheWarLasted;
     /**
      * Represents the total number of months of war experienced by all participants in a war.
      * <p>
@@ -218,4 +203,10 @@ public class War {
     private Boolean intervene;
     private String nonStateDeaths;
     private Boolean nonStateWar;
+    private Boolean intraStateWar;
+    private Boolean internationalized;
+    private Integer sideAPeakTotalMilitaryForces;
+    private Integer sideBPeakTotalMilitaryForces;
+    private Integer sideAPeakTheaterForces;
+    private Integer sideBPeakTheaterForces;
 }

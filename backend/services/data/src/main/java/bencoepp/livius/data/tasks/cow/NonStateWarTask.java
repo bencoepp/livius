@@ -58,6 +58,9 @@ public class NonStateWarTask extends Task {
 
         for (String dependency : job.getDependencies()){
             Job depJob = jobRepository.findByName(dependency);
+            if(depJob == null){
+                log.info("No jobs found for the specified dependency: " + dependency);
+            }
             if(!depJob.getStatus().equals(Job.STATUS_FINISHED)){
                 skip = true;
             }

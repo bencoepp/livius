@@ -43,7 +43,7 @@ public class COWTasks {
             String file = key + filename.substring(filename.lastIndexOf("."));
 
             try {
-                util.downloadSource(value, filename);
+                util.downloadSource(value, file);
 
                 List<String> dependencies = new ArrayList<>();
                 if(key.equals("livius.cow.majors")){

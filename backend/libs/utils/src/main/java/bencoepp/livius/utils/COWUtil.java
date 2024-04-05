@@ -17,11 +17,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * This class provides utility methods for working with COW (Correlates of War) data.
@@ -37,6 +36,7 @@ public class COWUtil {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
     public static final String DOWNLOAD_DIR = "/cow/data/";
+    private Integer csvZipFileCounter = 0;
 
     /**
      * Retrieves all properties with a given prefix from the environment and returns them as a map.
@@ -179,5 +179,62 @@ public class COWUtil {
             return false;
         }
         return true;
+    }
+
+    public List<File> unzipZipFile(String file) throws IOException {
+        List<File> output = new ArrayList<>();
+        String zipFile = System.getProperty("user.dir") + DOWNLOAD_DIR + file;
+        File destDir = new File(System.getProperty("user.dir") + DOWNLOAD_DIR + file.substring(0, file.lastIndexOf(".")));
+
+        byte[] buffer = new byte[1024];
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile));
+        ZipEntry zipEntry = zis.getNextEntry();
+
+        while (zipEntry != null) {
+            File newFile = newFile(destDir, zipEntry);
+            if (zipEntry.isDirectory()) {
+                if (!newFile.isDirectory() && !newFile.mkdirs()) {
+                    throw new IOException("Failed to create directory " + newFile);
+                }
+            } else {
+                // fix for Windows-created archives
+                File parent = newFile.getParentFile();
+                if (!parent.isDirectory() && !parent.mkdirs()) {
+                    throw new IOException("Failed to create directory " + parent);
+                }
+
+                // write file content
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.close();
+            }
+            zipEntry = zis.getNextEntry();
+            output.add(newFile);
+        }
+
+        zis.closeEntry();
+        zis.close();
+        return output;
+    }
+
+    private File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        String fileName = zipEntry.getName();
+        if(fileName.contains(".csv")){
+            fileName = "data-" + csvZipFileCounter + ".csv";
+            csvZipFileCounter++;
+        }
+        File destFile = new File(destinationDir, fileName);
+
+        String destDirPath = destinationDir.getCanonicalPath();
+        String destFilePath = destFile.getCanonicalPath();
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + fileName);
+        }
+
+        return destFile;
     }
 }
