@@ -59,7 +59,19 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * jobRepository.delete(savedJob);
  */
 public interface JobRepository extends MongoRepository<Job, String> {
+    /**
+     * Returns the Job object with the specified name, if it exists.
+     *
+     * @param name the name of the job to find
+     * @return the Job object with the specified name, or null if no such job exists
+     */
     Job findByName(String name);
 
+    /**
+     * Returns whether a Job object with the specified name exists.
+     *
+     * @param name the name of the job to check
+     * @return true if a Job object with the specified name exists, false otherwise
+     */
     boolean existsByName(String name);
 }

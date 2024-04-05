@@ -3,7 +3,6 @@ package bencoepp.livius.data.tasks.cow;
 import bencoepp.livius.data.events.JobEvent;
 import bencoepp.livius.data.tasks.Task;
 import bencoepp.livius.entities.job.Job;
-import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.war.War;
 import bencoepp.livius.repositories.job.JobRepository;
 import bencoepp.livius.repositories.state.StateRepository;
@@ -14,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +23,25 @@ import java.util.List;
 
 import static bencoepp.livius.utils.COWUtil.DOWNLOAD_DIR;
 
+/**
+ * The IntraStateWarTask class is a subclass of the Task class that represents a task for executing an intra-state war job.
+ * It is responsible for unpacking a ZIP file, processing a CSV file, and saving the war data to the database.
+ * <p>
+ * This class is annotated with the Spring Framework's @Component annotation, which marks it as a Spring bean and allows it
+ * to be automatically detected and instantiated by the Spring container.
+ * <p>
+ * This class contains several fields that are autowired using the Spring Framework's @Autowired annotation, which allows
+ * them to be automatically injected by the Spring container. These fields include:
+ * - jobRepository: A repository for accessing and manipulating job data in the database.
+ * - sequenceGeneratorService: A service for generating unique sequence numbers.
+ * - warRepository: A repository for accessing and manipulating war data in the database.
+ * - util: A utility class for performing various operations.
+ * - stateRepository: A repository for accessing and manipulating state data in the database.
+ * <p>
+ * This class overrides the run() method from the Task class and provides its own implementation. The run() method is executed
+ * when a JobEvent with the condition 'livius.cow.intra-state-war.zip' is triggered. It performs the following steps:
+ * 1. Retrieves the Job object associated with the event from the job repository.
+ **/
 @Component
 @Slf4j
 public class IntraStateWarTask extends Task {
@@ -40,6 +57,11 @@ public class IntraStateWarTask extends Task {
     @Autowired
     private StateRepository stateRepository;
 
+    /**
+     * Run method that executes the job when a JobEvent is triggered.
+     *
+     * @param event the JobEvent object
+     */
     @Override
     @EventListener(condition = "#event.condition.equals('livius.cow.intra-state-war.zip')")
     public void run(JobEvent event) {

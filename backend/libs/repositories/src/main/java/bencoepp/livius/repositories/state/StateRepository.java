@@ -49,13 +49,49 @@ public interface StateRepository extends MongoRepository<State, String> {
      */
     boolean existsByCowIdAndCode(Integer cowId, String code);
 
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given cowId and code.
+     *
+     * @param cowId the COW ID of the states to search for
+     * @param code the code associated with the states to search for
+     * @return a list of {@link State} objects matching the given cowId and code
+     */
     List<State> findByCowIdAndCode(Integer cowId, String code);
 
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given cowId.
+     *
+     * @param cowId the COW ID of the states to search for
+     * @return a list of {@link State} objects matching the given cowId
+     */
     List<State> findByCowId(Integer cowId);
 
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given cowId and name.
+     *
+     * @param cowId the COW ID of the states to search for
+     * @param name the name of the states to search for
+     * @return a list of {@link State} objects matching the given cowId and name
+     */
     List<State> findByCowIdAndName(Integer cowId, String name);
 
+    /**
+     * Check if a state document exists in the "states" collection of the MongoDB database
+     * based on the given name.
+     *
+     * @param name the name of the state to check
+     * @return true if a state document exists with the given name, false otherwise
+     */
     boolean existsByName(String name);
 
+    /**
+     * Finds a list of states by name in the "states" collection of the MongoDB database.
+     *
+     * @param name the name of the states to search for
+     * @return a list of {@link State} objects matching the given name
+     */
     List<State> findByName(String name);
 }

@@ -18,11 +18,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static bencoepp.livius.utils.COWUtil.DOWNLOAD_DIR;
 
+/**
+ * The ExtraStateWarTask class represents a task that processes a CSV file containing information about wars.
+ * It extends the Task class and overrides the run() method to perform the specific task logic.
+ */
 @Component
 @Slf4j
 public class ExtraStateWarTask extends Task {
@@ -38,6 +41,11 @@ public class ExtraStateWarTask extends Task {
     @Autowired
     private StateRepository stateRepository;
 
+    /**
+     * Executes the job when a {@link JobEvent} is triggered.
+     *
+     * @param event The event that triggered the execution.
+     */
     @Override
     @EventListener(condition = "#event.condition.equals('livius.cow.extra-state-war.csv')")
     public void run(JobEvent event) {

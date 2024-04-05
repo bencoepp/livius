@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
 
+/**
+ * This class represents the tasks to be performed in the application related to Correlates of War (COW) data.
+ */
 @Component
 @Slf4j
 public class COWTasks {

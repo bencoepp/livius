@@ -181,6 +181,13 @@ public class COWUtil {
         return true;
     }
 
+    /**
+     * Unzips a given zip file and returns a list of the extracted files.
+     *
+     * @param file The name of the zip file to be extracted.
+     * @return A list of File objects representing the extracted files.
+     * @throws IOException If an I/O error occurs during the extraction process.
+     */
     public List<File> unzipZipFile(String file) throws IOException {
         List<File> output = new ArrayList<>();
         String zipFile = System.getProperty("user.dir") + DOWNLOAD_DIR + file;
@@ -220,6 +227,16 @@ public class COWUtil {
         return output;
     }
 
+    /**
+     * Creates a new file in the specified destination directory based on the given ZipEntry.
+     *
+     * @param destinationDir the destination directory where the file will be created
+     * @param zipEntry the ZipEntry representing the file
+     * @return the newly created File object
+     * @throws IOException if an I/O error occurs while creating the file or determining its path
+     * @throws IllegalArgumentException if the file name doesn't end with ".csv"
+     * @throws IOException if the entry is located outside of the target directory
+     */
     private File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         String fileName = zipEntry.getName();
         if(fileName.contains(".csv")){
