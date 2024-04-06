@@ -3,10 +3,12 @@ package bencoepp.livius.data.tasks.weather;
 import bencoepp.livius.data.events.JobEvent;
 import bencoepp.livius.data.tasks.Task;
 import bencoepp.livius.entities.job.Job;
+import bencoepp.livius.entities.state.Country;
 import bencoepp.livius.entities.weather.Weather;
 import bencoepp.livius.repositories.job.JobRepository;
 import bencoepp.livius.repositories.weather.WeatherRepository;
 import bencoepp.livius.utils.SequenceGeneratorService;
+import bencoepp.livius.utils.WeatherUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,11 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.time.Instant;
 
+import static bencoepp.livius.utils.WeatherUtil.DOWNLOAD_DIR;
+
+/**
+ * The WeatherTask class processes weather-related events.
+ * It extends the Task class and overrides the run method to perform the necessary operations for processing weather events.
+ */
 @Component
 @Slf4j
 public class WeatherTask extends Task {
@@ -32,7 +39,14 @@ public class WeatherTask extends Task {
     @Autowired
     private WeatherRepository weatherRepository;
     private static final String BASE_URL = "https://www.ncei.noaa.gov/data/global-hourly/access/";
+    @Autowired
+    private WeatherUtil util;
 
+    /**
+     * Runs the job for processing weather-related events.
+     *
+     * @param event The JobEvent object containing event details.
+     */
     @Override
     @EventListener(condition = "#event.type.equals('weather')")
     public void run(JobEvent event) {
@@ -40,49 +54,31 @@ public class WeatherTask extends Task {
         job.setStatus(Job.STATUS_EXECUTING);
         job.setStarted(Instant.now());
         jobRepository.save(job);
-        downloadCsvFiles(job.getUrl());
-        super.run(event);
-    }
-
-    /**
-     * Downloads CSV files from a given directory URL.
-     *
-     * @param url the url of the path
-     */
-    private void downloadCsvFiles(String url) {
-        String completeUrl = url;
 
         try {
-            Document doc = Jsoup.connect(completeUrl).get();
+            Document doc = Jsoup.connect(job.getUrl()).get();
 
             Elements linksOnPage = doc.select("a[href]");
             log.debug("Number of links on the page: " + linksOnPage.size());
-
             for (Element page : linksOnPage) {
                 String href = page.attr("href");
                 if (href.endsWith(".csv")) {
-                    log.debug("CSV file found: " + href);
-                    streamCSVFileContent(completeUrl + href);
+                    log.info("CSV file found: {}", job.getUrl() + href);
+                    util.downloadCSV(job.getUrl() + href, job.getName(), href);
+                    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + DOWNLOAD_DIR + job.getName() + "/" + href))) {
+                        bufferedReader.lines().forEach(line -> {
+                            createAndSaveWeatherObject(line, job.getUrl());
+                        });
+                    } catch (Exception e) {
+                        log.error("Error occurred while streaming CSV file content", e);
+                    }
                 }
             }
         } catch (IOException e) {
             log.error("Error occurred while fetching CSV files", e);
         }
-    }
 
-    /**
-     * Streams the content of a CSV file from the given URL and creates and saves WeatherObject instances.
-     *
-     * @param csvUrl the URL of the CSV file to stream
-     */
-    private void streamCSVFileContent(String csvUrl) {
-        log.debug("Processing CSV file: " + csvUrl);
-        try (BufferedReader bufferedReader =
-                     new BufferedReader(new InputStreamReader(new URL(csvUrl).openStream()))) {
-            bufferedReader.lines().forEach(line -> createAndSaveWeatherObject(line, csvUrl));
-        } catch (IOException e) {
-            log.error("Error occurred while streaming CSV file content", e);
-        }
+        super.run(event);
     }
 
     /**

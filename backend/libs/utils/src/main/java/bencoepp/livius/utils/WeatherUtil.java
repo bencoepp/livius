@@ -2,12 +2,20 @@ package bencoepp.livius.utils;
 
 import bencoepp.livius.entities.weather.Weather;
 import bencoepp.livius.repositories.weather.WeatherRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +25,11 @@ import java.util.Map;
  * The WeatherUtil class provides utility methods for working with weather data.
  */
 @Service
+@Slf4j
 public class WeatherUtil {
     @Autowired
     private WeatherRepository weatherRepository;
-
+    public static final String DOWNLOAD_DIR = "/weather/data/";
     /**
      * Creates a Pageable object using the specified page number and page size.
      *
@@ -71,5 +80,20 @@ public class WeatherUtil {
         //TODO needs to be implemented
 
         return output;
+    }
+
+    /**
+     * Downloads the source file from the given URL and saves it with the specified filename.
+     *
+     * @param url      the URL of the source file to download
+     * @param filename the filename to save the downloaded file as
+     * @throws IOException if an I/O error occurs while downloading or saving the file
+     */
+    public void downloadCSV(String url, String folder, String filename) throws IOException {
+        try (InputStream in = new URL(url).openStream()) {
+            Files.createDirectories(Path.of(System.getProperty("user.dir") + DOWNLOAD_DIR + folder + "/"));
+            Files.copy(in, Path.of(System.getProperty("user.dir") + DOWNLOAD_DIR + folder + "/" + filename), StandardCopyOption.REPLACE_EXISTING);
+            log.info("Downloaded file from {}", url);
+        }
     }
 }
