@@ -1,6 +1,8 @@
 package bencoepp.livius.data.tasks;
 
+import bencoepp.livius.entities.job.Job;
 import bencoepp.livius.entities.weather.Weather;
+import bencoepp.livius.repositories.job.JobRepository;
 import bencoepp.livius.repositories.weather.WeatherRepository;
 import bencoepp.livius.utils.SequenceGeneratorService;
 import org.jsoup.Jsoup;
@@ -11,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,8 @@ public class WeatherTasks {
 
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private JobRepository jobRepository;
 
     /**
      * This method is responsible for importing weather data.
@@ -50,88 +51,20 @@ public class WeatherTasks {
         List<String> directories = getSubDirectories(BASE_URL);
         log.info("Number of years found: " + directories.size());
 
-        if(weatherRepository.count() != 0){
-            String lastYear = findLastYearImported();
-            directories = directories.subList(directories.indexOf(lastYear + "/"), directories.size());
-        }
-
-        directories.forEach(directory -> {
-            log.debug("Processing directory: " + directory);
-            downloadCsvFiles(directory);
-        });
-
-        log.info("Weather data finished importing");
-    }
-
-    private String findLastYearImported() {
-        Weather last = weatherRepository.findFirstByIdNotNullOrderByIdDesc();
-        String date = last.getDate().split("-")[0];
-        weatherRepository.deleteByDateContains(date);
-        return date;
-    }
-
-    /**
-     * Downloads CSV files from a given directory URL.
-     *
-     * @param directory the directory path relative to the BASE_URL
-     */
-    private void downloadCsvFiles(String directory) {
-        String completeUrl = BASE_URL + directory;
-
-        try {
-            Document doc = Jsoup.connect(completeUrl).get();
-
-            Elements linksOnPage = doc.select("a[href]");
-            log.debug("Number of links on the page: " + linksOnPage.size());
-
-            for (Element page : linksOnPage) {
-                String href = page.attr("href");
-                if (href.endsWith(".csv")) {
-                    log.debug("CSV file found: " + href);
-                    streamCSVFileContent(completeUrl + href);
-                }
+        for (String directory : directories) {
+            Job job = new Job();
+            job.setId(sequenceGeneratorService.getSequenceNumber(Job.SEQUENCE_NAME));
+            job.setName(directory.replace("/",""));
+            job.setUrl(BASE_URL + directory);
+            job.setType(Job.TYPE_WEATHER);
+            job.setStatus(Job.STATUS_SCHEDULED);
+            job.setCreated(Instant.now());
+            if(!jobRepository.existsByName(directory)){
+                jobRepository.save(job);
             }
-        } catch (IOException e) {
-            log.error("Error occurred while fetching CSV files", e);
         }
-    }
 
-    /**
-     * Streams the content of a CSV file from the given URL and creates and saves WeatherObject instances.
-     *
-     * @param csvUrl the URL of the CSV file to stream
-     */
-    private void streamCSVFileContent(String csvUrl) {
-        log.debug("Processing CSV file: " + csvUrl);
-        try (BufferedReader bufferedReader =
-                     new BufferedReader(new InputStreamReader(new URL(csvUrl).openStream()))) {
-            bufferedReader.lines().forEach(line -> createAndSaveWeatherObject(line, csvUrl));
-        } catch (IOException e) {
-            log.error("Error occurred while streaming CSV file content", e);
-        }
-    }
-
-    /**
-     * Creates a Weather object from the given line and saves it to the weather repository.
-     * If the line contains 'LATITUDE', the method immediately returns without creating the object.
-     *
-     * @param line the line from which to create the Weather object
-     */
-    private void createAndSaveWeatherObject(String line, String url) {
-        if(line.contains("LATITUDE")){
-            log.debug("Line contains 'LATITUDE'");
-            return;
-        }
-        Weather weather = new Weather(line);
-        weather.setId(sequenceGeneratorService.getSequenceNumber(Weather.SEQUENCE_NAME));
-        log.debug("Created Weather object");
-        weather.setCreated(Instant.now());
-        weather.setUpdated(Instant.now());
-        weather.setAccessDate(Instant.now().toString());
-        weather.setCitation("NOAA National Centers for Environmental Information (2001): Global Surface Hourly [indicate subset used]. NOAA National Centers for Environmental Information. " + weather.getAccessDate());
-        weather.setDatasetUrl(url);
-        weatherRepository.save(weather);
-        log.debug("Weather object saved");
+        log.info("Finished creating weather jobs");
     }
 
     /**
