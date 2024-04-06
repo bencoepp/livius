@@ -25,6 +25,7 @@ public class Job {
     private String type;
     @Transient
     public static final String TYPE_COW = "cow";
+    public static final String TYPE_WEATHER = "weather";
     private String status;
     @Transient
     public static final String STATUS_SCHEDULED = "scheduled";

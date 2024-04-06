@@ -42,6 +42,7 @@ public class JobEvent extends ApplicationEvent {
      * This variable is private to ensure encapsulation and should only be accessed through appropriate getter and setter methods defined in the containing class.
      */
     private String jobId;
+    private String type;
     /**
      * The JobEvent class represents an event that occurs during the execution of a job.
      * It extends the ApplicationEvent class, which is the base class for application events in Spring.
@@ -49,9 +50,10 @@ public class JobEvent extends ApplicationEvent {
      * <p>
      * Use the JobEvent class to pass information about the job to event listeners or handlers.
      */
-    public JobEvent(Object source, String condition, String jobId) {
+    public JobEvent(Object source, String condition, String jobId, String type) {
         super(source);
         this.condition = condition;
         this.jobId = jobId;
+        this.type = type;
     }
 }

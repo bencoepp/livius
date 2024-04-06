@@ -42,11 +42,11 @@ public class Scheduler {
      * }
      * }</pre>
      */
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedRate = 5000)
     private void run(){
         for (Job job : jobRepository.findAll()){
             if(job.getStatus().equals(Job.STATUS_SCHEDULED)){
-                applicationEventPublisher.publishEvent(new JobEvent(this, job.getName(), job.getId()));
+                applicationEventPublisher.publishEvent(new JobEvent(this, job.getName(), job.getId(), job.getType()));
             }
         }
     }
