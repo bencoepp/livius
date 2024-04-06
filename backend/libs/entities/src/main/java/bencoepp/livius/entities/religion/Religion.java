@@ -1,5 +1,6 @@
 package bencoepp.livius.entities.religion;
 
+import bencoepp.livius.entities.state.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import java.util.List;
 
 /**
  * The {@code Religion} class represents a religion with different attributes and properties.
@@ -28,15 +32,45 @@ public class Religion {
     private String id;
     private Integer year;
     private Integer cowId;
-    private String name;
+    @DocumentReference
+    private List<State> state;
+    /**
+     * Number of adherents belonging to the Christian Protestant religion.
+     */
     private Integer christianProtestantNoOfAdherents;
+    /**
+     * Represents the number of adherents of Roman Catholics in the Christian religion.
+     *
+     * This variable stores an Integer value.
+     */
     private Integer christianRomanCatholicsNoOfAdherents;
+    /**
+     * The number of adherents of Eastern Orthodox Christianity.
+     */
     private Integer christianEasternOrthodoxNoOfAdherents;
+    /**
+     * The number of adherents to the Christian Anglican denomination.
+     */
     private Integer christianAnglicanNoOfAdherents;
+    /**
+     * Number of adherents belonging to the category of Christian Others.
+     */
     private Integer christianOthersNoOfAdherents;
+    /**
+     * The total number of adherents of Christianity.
+     */
     private Integer christianTotalNoOfAdherents;
+    /**
+     * The number of adherents of Orthodox Judaism.
+     */
     private Integer judaismOrthodoxNoOfAdherents;
+    /**
+     * The number of adherents of Judaism who identify as Conservatives.
+     */
     private Integer judaismConservativesNoOfAdherents;
+    /**
+     * Number of adherents in Judaism who identify with the Reform movement.
+     */
     private Integer judaismReformNoOfAdherents;
     private Integer judaismOthersNoOfAdherents;
     private Integer judaismTotalNoOfAdherents;
@@ -59,6 +93,7 @@ public class Religion {
     private Integer bahaiTotalNoOfAdherents;
     private Integer taoismTotalNoOfAdherents;
     private Integer confucianismTotalNoOfAdherents;
+    private Integer jainTotalNoOfAdherents;
     private Integer syncreticReligionsTotalNoOfAdherents;
     private Integer animistReligionsTotalNoOfAdherents;
     private Integer nonReligiousTotalNoOfAdherents;
@@ -104,6 +139,7 @@ public class Religion {
     private Integer totalPopulationPercantageCheck;
     private Boolean dualReligion;
     private String dataType;
+    public final static String TYPE_NONE = "none";
     public final static String TYPE_SINGLE_SOURCE = "single_source";
     public final static String TYPE_MULTIPLE_SOURCE = "multiple_source";
     public final static String TYPE_INTERPOLATED = "interpolated";
@@ -116,9 +152,11 @@ public class Religion {
     public final static String TYPE_MULTIPLE_SOURCE_INTERPOLATED_ADJUSTED = "multiple_source_interpolated_adjusted";
     public final static String TYPE_INTERPOLATED_ADJUSTED = "interpolated_adjusted";
     private String reliabilityOfRecord;
+    public final static String RELIABILITY_OF_RECORD_NONE = "none";
     public final static String RELIABILITY_OF_RECORD_VERY_HIGH = "very_high";
     public final static String RELIABILITY_OF_RECORD_VERY_LOW = "very_low";
     private String levelOfReliabilityOfRecord;
+    public final static String LEVEL_OF_RELIABILITY_OF_RECORD_NONE = "none";
     public final static String LEVEL_OF_RELIABILITY_OF_RECORD_HIGH = "high";
     public final static String LEVEL_OF_RELIABILITY_OF_RECORD_MEDIUM = "medium";
     public final static String LEVEL_OF_RELIABILITY_OF_RECORD_LOW = "low";

@@ -94,4 +94,6 @@ public interface StateRepository extends MongoRepository<State, String> {
      * @return a list of {@link State} objects matching the given name
      */
     List<State> findByName(String name);
+
+    List<State> findByCode(String code);
 }
