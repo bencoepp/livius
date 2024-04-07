@@ -308,4 +308,18 @@ public class COWUtil {
 
         return destFile;
     }
+
+    /**
+     * Converts a string value to an integer.
+     *
+     * @param value the string value to be converted
+     * @return the converted integer value, or 0 if the conversion fails
+     */
+    public Integer convertStringToInteger(String value){
+        try{
+            return Integer.valueOf(value);
+        }catch(NumberFormatException e){
+            return 0;
+        }
+    }
 }

@@ -5,6 +5,7 @@ import bencoepp.livius.entities.job.Job;
 import bencoepp.livius.repositories.job.JobRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,10 @@ public class Scheduler {
     private JobRepository jobRepository;
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
-
+    @Value("${livius.app.cow.start-jobs}")
+    private Boolean startCowJobs;
+    @Value("${livius.app.weather.start-jobs}")
+    private Boolean startWeatherJobs;
 
     /**
      * This method is executed periodically according to the specified fixed delay of 5000 milliseconds.
@@ -46,7 +50,11 @@ public class Scheduler {
     private void run(){
         for (Job job : jobRepository.findAll()){
             if(job.getStatus().equals(Job.STATUS_SCHEDULED)){
-                applicationEventPublisher.publishEvent(new JobEvent(this, job.getName(), job.getId(), job.getType()));
+                if(job.getType().equals(Job.TYPE_COW) && startCowJobs){
+                    applicationEventPublisher.publishEvent(new JobEvent(this, job.getName(), job.getId(), job.getType()));
+                }else if(job.getType().equals(Job.TYPE_WEATHER) && startWeatherJobs){
+                    applicationEventPublisher.publishEvent(new JobEvent(this, job.getName(), job.getId(), job.getType()));
+                }
             }
         }
     }

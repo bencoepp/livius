@@ -9,7 +9,6 @@ import bencoepp.livius.repositories.religion.ReligionRepository;
 import bencoepp.livius.repositories.state.StateRepository;
 import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
-import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -53,49 +52,49 @@ public class ReligionTask extends Task {
                     religion.setCowId(Integer.parseInt(data[1]));
                     religion.setState(stateRepository.findByCode(data[2]));
 
-                    religion.setChristianProtestantNoOfAdherents(Integer.valueOf(data[3]));
-                    religion.setChristianRomanCatholicsNoOfAdherents(Integer.valueOf(data[4]));
-                    religion.setChristianEasternOrthodoxNoOfAdherents(Integer.valueOf(data[5]));
-                    religion.setChristianAnglicanNoOfAdherents(Integer.valueOf(data[6]));
-                    religion.setChristianOthersNoOfAdherents(Integer.valueOf(data[7]));
-                    religion.setChristianTotalNoOfAdherents(Integer.valueOf(data[8]));
+                    religion.setChristianProtestantNoOfAdherents(util.convertStringToInteger(data[3]));
+                    religion.setChristianRomanCatholicsNoOfAdherents(util.convertStringToInteger(data[4]));
+                    religion.setChristianEasternOrthodoxNoOfAdherents(util.convertStringToInteger(data[5]));
+                    religion.setChristianAnglicanNoOfAdherents(util.convertStringToInteger(data[6]));
+                    religion.setChristianOthersNoOfAdherents(util.convertStringToInteger(data[7]));
+                    religion.setChristianTotalNoOfAdherents(util.convertStringToInteger(data[8]));
 
-                    religion.setJudaismOrthodoxNoOfAdherents(Integer.valueOf(data[9]));
-                    religion.setJudaismConservativesNoOfAdherents(Integer.valueOf(data[10]));
-                    religion.setJudaismReformNoOfAdherents(Integer.valueOf(data[11]));
-                    religion.setJudaismOthersNoOfAdherents(Integer.valueOf(data[12]));
-                    religion.setJudaismTotalNoOfAdherents(Integer.valueOf(data[13]));
+                    religion.setJudaismOrthodoxNoOfAdherents(util.convertStringToInteger(data[9]));
+                    religion.setJudaismConservativesNoOfAdherents(util.convertStringToInteger(data[10]));
+                    religion.setJudaismReformNoOfAdherents(util.convertStringToInteger(data[11]));
+                    religion.setJudaismOthersNoOfAdherents(util.convertStringToInteger(data[12]));
+                    religion.setJudaismTotalNoOfAdherents(util.convertStringToInteger(data[13]));
 
-                    religion.setIslamSunniNoOfAdherents(Integer.valueOf(data[14]));
-                    religion.setIslamShiaNoOfAdherents(Integer.valueOf(data[15]));
-                    religion.setIslamIbadhiNoOfAdherents(Integer.valueOf(data[16]));
-                    religion.setIslamNationOfIslamNoOfAdherents(Integer.valueOf(data[17]));
-                    religion.setIslamAlawiteNoOfAdherents(Integer.valueOf(data[18]));
-                    religion.setIslamAhmadiyyaNoOfAdherents(Integer.valueOf(data[19]));
-                    religion.setIslamOtherNoOfAdherents(Integer.valueOf(data[20]));
-                    religion.setIslamTotalNoOfAdherents(Integer.valueOf(data[21]));
+                    religion.setIslamSunniNoOfAdherents(util.convertStringToInteger(data[14]));
+                    religion.setIslamShiaNoOfAdherents(util.convertStringToInteger(data[15]));
+                    religion.setIslamIbadhiNoOfAdherents(util.convertStringToInteger(data[16]));
+                    religion.setIslamNationOfIslamNoOfAdherents(util.convertStringToInteger(data[17]));
+                    religion.setIslamAlawiteNoOfAdherents(util.convertStringToInteger(data[18]));
+                    religion.setIslamAhmadiyyaNoOfAdherents(util.convertStringToInteger(data[19]));
+                    religion.setIslamOtherNoOfAdherents(util.convertStringToInteger(data[20]));
+                    religion.setIslamTotalNoOfAdherents(util.convertStringToInteger(data[21]));
 
-                    religion.setBuddhismMahayanaNoOfAdherents(Integer.valueOf(data[22]));
-                    religion.setBuddhismTheravadaNoOfAdherents(Integer.valueOf(data[23]));
-                    religion.setBuddhismOtherNoOfAdherents(Integer.valueOf(data[24]));
-                    religion.setBuddhismTotalNoOfAdherents(Integer.valueOf(data[25]));
+                    religion.setBuddhismMahayanaNoOfAdherents(util.convertStringToInteger(data[22]));
+                    religion.setBuddhismTheravadaNoOfAdherents(util.convertStringToInteger(data[23]));
+                    religion.setBuddhismOtherNoOfAdherents(util.convertStringToInteger(data[24]));
+                    religion.setBuddhismTotalNoOfAdherents(util.convertStringToInteger(data[25]));
 
 
-                    religion.setZoroastrianTotalNoOfAdherents(Integer.valueOf(data[26]));
-                    religion.setHinduTotalNoOfAdherents(Integer.valueOf(data[27]));
-                    religion.setSikhTotalNoOfAdherents(Integer.valueOf(data[28]));
-                    religion.setShintoTotalNoOfAdherents(Integer.valueOf(data[29]));
-                    religion.setBahaiTotalNoOfAdherents(Integer.valueOf(data[30]));
-                    religion.setTaoismTotalNoOfAdherents(Integer.valueOf(data[31]));
-                    religion.setConfucianismTotalNoOfAdherents(Integer.valueOf(data[32]));
-                    religion.setJainTotalNoOfAdherents(Integer.valueOf(data[33]));
-                    religion.setSyncreticReligionsTotalNoOfAdherents(Integer.valueOf(data[34]));
-                    religion.setAnimistReligionsTotalNoOfAdherents(Integer.valueOf(data[35]));
+                    religion.setZoroastrianTotalNoOfAdherents(util.convertStringToInteger(data[26]));
+                    religion.setHinduTotalNoOfAdherents(util.convertStringToInteger(data[27]));
+                    religion.setSikhTotalNoOfAdherents(util.convertStringToInteger(data[28]));
+                    religion.setShintoTotalNoOfAdherents(util.convertStringToInteger(data[29]));
+                    religion.setBahaiTotalNoOfAdherents(util.convertStringToInteger(data[30]));
+                    religion.setTaoismTotalNoOfAdherents(util.convertStringToInteger(data[31]));
+                    religion.setConfucianismTotalNoOfAdherents(util.convertStringToInteger(data[32]));
+                    religion.setJainTotalNoOfAdherents(util.convertStringToInteger(data[33]));
+                    religion.setSyncreticReligionsTotalNoOfAdherents(util.convertStringToInteger(data[34]));
+                    religion.setAnimistReligionsTotalNoOfAdherents(util.convertStringToInteger(data[35]));
 
-                    religion.setNonReligiousTotalNoOfAdherents(Integer.valueOf(data[36]));
-                    religion.setOtherTotalNoOfAdherents(Integer.valueOf(data[37]));
-                    religion.setSumOfReligionAdherents(Integer.valueOf(data[38]));
-                    religion.setTotalPopulation(Integer.valueOf(data[39]));
+                    religion.setNonReligiousTotalNoOfAdherents(util.convertStringToInteger(data[36]));
+                    religion.setOtherTotalNoOfAdherents(util.convertStringToInteger(data[37]));
+                    religion.setSumOfReligionAdherents(util.convertStringToInteger(data[38]));
+                    religion.setTotalPopulation(util.convertStringToInteger(data[39]));
 
                     religion.setChristianityProtestantsPctAdherents(Double.valueOf(data[40]));
                     religion.setChristianityRomanCatholicsPctAdherents(Double.valueOf(data[41]));
@@ -137,7 +136,7 @@ public class ReligionTask extends Task {
                     religion.setNonReligiousPctAdherents(Double.valueOf(data[73]));
                     religion.setOtherReligionsPctAdherents(Double.valueOf(data[74]));
                     religion.setSumPercentReligiousAdherents(Double.valueOf(data[75]));
-                    religion.setTotalPopulationPercantageCheck(Integer.valueOf(data[76]));
+                    religion.setTotalPopulationPercantageCheck(Double.valueOf(data[76]));
                     religion.setDualReligion(util.convert0or1ToBoolean(data[77]));
 
                     religion.setDataType(util.findDataTypeReligion(Integer.valueOf(data[78])));

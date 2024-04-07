@@ -136,7 +136,7 @@ public class Religion {
     private Double nonReligiousPctAdherents;
     private Double otherReligionsPctAdherents;
     private Double sumPercentReligiousAdherents;
-    private Integer totalPopulationPercantageCheck;
+    private Double totalPopulationPercantageCheck;
     private Boolean dualReligion;
     private String dataType;
     public final static String TYPE_NONE = "none";
