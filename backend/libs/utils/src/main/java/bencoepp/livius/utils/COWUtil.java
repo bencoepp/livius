@@ -1,5 +1,6 @@
 package bencoepp.livius.utils;
 
+import bencoepp.livius.entities.religion.Religion;
 import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.war.War;
 import bencoepp.livius.repositories.state.StateRepository;
@@ -147,6 +148,59 @@ public class COWUtil {
     }
 
     /**
+     * Finds the religion data type based on the given type.
+     *
+     * @param type the type of religion data
+     * @return the corresponding religion data type
+     */
+    public String findDataTypeReligion(Integer type){
+        return switch (type) {
+            case 1 -> Religion.TYPE_SINGLE_SOURCE;
+            case 2 -> Religion.TYPE_MULTIPLE_SOURCE;
+            case 3 -> Religion.TYPE_INTERPOLATED;
+            case 4 -> Religion.TYPE_ADJUSTED;
+            case 13 -> Religion.TYPE_SINGLE_SOURCE_INTERPOLATED;
+            case 14 -> Religion.TYPE_SINGLE_SOURCE_ADJUSTED;
+            case 134 -> Religion.TYPE_SINGLE_SOURCE_INTERPOLATED_ADJUSTED;
+            case 23 -> Religion.TYPE_MULTIPLE_SOURCE_INTERPOLATED;
+            case 24 -> Religion.TYPE_MULTIPLE_SOURCE_ADJUSTED;
+            case 234 -> Religion.TYPE_MULTIPLE_SOURCE_INTERPOLATED_ADJUSTED;
+            case 34 -> Religion.TYPE_INTERPOLATED_ADJUSTED;
+            default -> Religion.TYPE_NONE;
+        };
+    }
+
+    /**
+     * Finds the reliability of a record based on the given reliability value.
+     *
+     * @param reliability the reliability value of the record
+     * @return the reliability of the record
+     */
+    public String findReliabilityOfRecord(Integer reliability){
+        return switch (reliability) {
+            case 1 -> Religion.RELIABILITY_OF_RECORD_VERY_HIGH;
+            case 35 -> Religion.RELIABILITY_OF_RECORD_VERY_LOW;
+            default -> Religion.RELIABILITY_OF_RECORD_NONE;
+        };
+    }
+
+    /**
+     * Finds the level of reliability of a record based on the given level.
+     *
+     * @param level The level of reliability (1, 2, 3) representing high, medium, and low respectively.
+     *
+     * @return The level of reliability of the record as a string.
+     */
+    public String findLevelOfReliabilityOfRecord(Integer level){
+        return switch (level) {
+            case 1 -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_HIGH;
+            case 2 -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_MEDIUM;
+            case 3 -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_LOW;
+            default -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_NONE;
+        };
+    }
+
+    /**
      * Creates a non-state entity with the given name.
      *
      * @param name the name of the entity to be created
@@ -253,5 +307,19 @@ public class COWUtil {
         }
 
         return destFile;
+    }
+
+    /**
+     * Converts a string value to an integer.
+     *
+     * @param value the string value to be converted
+     * @return the converted integer value, or 0 if the conversion fails
+     */
+    public Integer convertStringToInteger(String value){
+        try{
+            return Integer.valueOf(value);
+        }catch(NumberFormatException e){
+            return 0;
+        }
     }
 }

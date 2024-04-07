@@ -57,6 +57,10 @@ public class COWTasks {
                     dependencies.add("livius.cow.states.csv");
                 }
 
+                if(key.equals("livius.cow.wrd.csv")){
+                    dependencies.add("livius.cow.states.csv");
+                }
+
                 Job job = new Job(
                         sequenceGeneratorService.getSequenceNumber(Job.SEQUENCE_NAME),
                         file,
