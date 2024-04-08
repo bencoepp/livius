@@ -1,6 +1,7 @@
 package bencoepp.livius.utils;
 
 import bencoepp.livius.entities.religion.Religion;
+import bencoepp.livius.entities.state.DiplomaticExchange;
 import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.war.War;
 import bencoepp.livius.repositories.state.StateRepository;
@@ -197,6 +198,37 @@ public class COWUtil {
             case 2 -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_MEDIUM;
             case 3 -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_LOW;
             default -> Religion.LEVEL_OF_RELIABILITY_OF_RECORD_NONE;
+        };
+    }
+
+    /**
+     * Finds the diplomatic representation level based on the given level.
+     *
+     * @param level the level of representation
+     * @return the corresponding diplomatic representation level
+     */
+    public String findDiplomaticRepresentationLevel(Integer level){
+        return switch (level) {
+            case 0 -> DiplomaticExchange.DR_NO_EVIDENCE_OF_DIPLOMATIC_EXCHANGE;
+            case 1 -> DiplomaticExchange.DR_CHARGE_DAFFAIRES;
+            case 2 -> DiplomaticExchange.DR_MINISTER;
+            case 3 -> DiplomaticExchange.DR_AMBASSADOR;
+            case 9 -> DiplomaticExchange.DR_OTHER;
+            default -> DiplomaticExchange.DR_NONE;
+        };
+    }
+
+    /**
+     * Finds a diplomatic exchange for a given level.
+     *
+     * @param level the level of the diplomatic exchange
+     * @return the diplomatic exchange
+     */
+    public String findAnyDiplomaticExchange(Integer level){
+        return switch (level) {
+            case 0 -> DiplomaticExchange.DE_NEITHER_SIDE;
+            case 1 -> DiplomaticExchange.DE_AT_LEAST_ONE;
+            default -> DiplomaticExchange.DE_NONE;
         };
     }
 

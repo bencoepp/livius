@@ -98,6 +98,35 @@ public class State {
     @DocumentReference
     private List<MajorPower> wasMajorPower;
     /**
+     * This variable represents a list of diplomatic exchanges in the context of a state.
+     *
+     * A diplomatic exchange refers to any form of communication or negotiation
+     * between two or more states, aimed at resolving conflicts, reaching agreements
+     * or maintaining diplomatic relations.
+     *
+     * The type of the elements in the list is {@link DiplomaticExchange}, which
+     * encapsulates the information related to a specific diplomatic exchange.
+     *
+     * This variable is declared as a private instance member in the {@link State} class,
+     * which acts as the containing class of this variable.
+     *
+     * Please note that the containing class has several other fields and methods related
+     * to the state representation, such as id, code, cowId, name, startDate, endDate,
+     * wasMajorPower, created, updated, citation, accessTime, authors, and faqEmail.
+     *
+     * This variable is annotated with {@link DocumentReference}, indicating its usage
+     * as a reference to a document or section within a document.
+     *
+     * This variable is accessed or modified through the appropriate methods defined in
+     * the {@link State} class.
+     *
+     * @see DiplomaticExchange
+     * @see State
+     * @see DocumentReference
+     */
+    @DocumentReference
+    private List<DiplomaticExchange> diplomaticExchanges;
+    /**
      * The created field represents the creation timestamp of an object.
      * <p>
      * This field is a private instance variable within the State class, which represents a state entity in a system.
@@ -134,6 +163,7 @@ public class State {
     private Instant accessTime;
     private String[] authors;
     private String faqEmail;
+
     public State(String csvLine) throws ParseException {
         String[] data = csvLine.split(",");
         this.code = data[0];

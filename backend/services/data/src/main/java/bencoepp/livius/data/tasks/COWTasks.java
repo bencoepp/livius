@@ -57,7 +57,11 @@ public class COWTasks {
                     dependencies.add("livius.cow.states.csv");
                 }
 
-                if(key.equals("livius.cow.wrd.csv")){
+                if(key.equals("livius.cow.wrdv")){
+                    dependencies.add("livius.cow.states.csv");
+                }
+
+                if(key.equals("livius.cow.de")){
                     dependencies.add("livius.cow.states.csv");
                 }
 

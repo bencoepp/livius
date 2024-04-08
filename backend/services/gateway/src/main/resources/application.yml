@@ -16,4 +16,4 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: ${EUREKA_SIFF:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_LIVIUS:http://localhost:8761/eureka}
