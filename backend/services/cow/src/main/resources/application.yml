@@ -2,7 +2,7 @@ server:
   port: 5000
 spring:
   application:
-    name: EVENT-SERVICE
+    name: COW-SERVICE
   data:
     mongodb:
       uri: ${LIVIUS_DB_URI:mongodb://root:example@localhost:27017}

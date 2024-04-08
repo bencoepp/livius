@@ -12,27 +12,27 @@
         <spring-cloud.version>2023.0.0</spring-cloud.version>
     </properties>
     <artifactId>cow</artifactId>
-
+    <version>1.0.0.1</version>
     <dependencies>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>entities</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0.0</version>
         </dependency>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>repositories</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0.0</version>
         </dependency>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>utils</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0.0</version>
         </dependency>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>security</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
