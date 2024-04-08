@@ -22,6 +22,30 @@ spec:
     spec:
       containers:
         - name: weather-service
-          image: registry.bencoepp.de/livius/weather:1.0.0.0
+          image: registry.bencoepp.de/livius/weather:1.0.0.1
           ports:
             - containerPort: 4000
+          env:
+            - name: EUREKA_LIVIUS
+              value: http://eureka-0.eureka.livius.svc.cluster.local:8761/eureka
+            - name: LIVIUS_DB_URI
+              value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
+            - name: LIVIUS_DB
+              value: test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather
+  namespace: livius
+  labels:
+    app: livius
+    tier: weather
+spec:
+  clusterIP: None
+  ports:
+    - port: 27017
+      name: weather-svc
+  selector:
+    app: livius
+    tier: weather

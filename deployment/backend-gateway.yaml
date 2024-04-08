@@ -22,9 +22,12 @@ spec:
     spec:
       containers:
         - name: user-service-app
-          image: registry.bencoepp.de/livius/gateway:1.0.0.0
+          image: registry.bencoepp.de/livius/gateway:1.0.0.1
           ports:
             - containerPort: 8080
+          env:
+            - name: EUREKA_LIVIUS
+              value: http://eureka-0.eureka.livius.svc.cluster.local:8761/eureka
 ---
 kind: Service
 apiVersion: v1

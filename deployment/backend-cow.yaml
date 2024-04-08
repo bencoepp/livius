@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: data
+  name: cow
   namespace: livius
   labels:
     app: livius
-    tier: data
+    tier: cow
 spec:
   replicas: 1
   strategy:
@@ -13,18 +13,18 @@ spec:
   selector:
     matchLabels:
       app: livius
-      tier: data
+      tier: cow
   template:
     metadata:
       labels:
         app: livius
-        tier: data
+        tier: cow
     spec:
       containers:
-        - name: data-service
-          image: registry.bencoepp.de/livius/data:1.0.0.0
+        - name: cow-service
+          image: registry.bencoepp.de/livius/cow:1.0.0.1
           ports:
-            - containerPort: 3000
+            - containerPort: 5000
           env:
             - name: EUREKA_LIVIUS
               value: http://eureka-0.eureka.livius.svc.cluster.local:8761/eureka
@@ -32,20 +32,3 @@ spec:
               value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
             - name: LIVIUS_DB
               value: test
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: data
-  namespace: livius
-  labels:
-    app: livius
-    tier: data
-spec:
-  clusterIP: None
-  ports:
-    - port: 27017
-      name: data-svc
-  selector:
-    app: livius
-    tier: data
