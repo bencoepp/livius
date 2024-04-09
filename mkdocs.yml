@@ -10,6 +10,7 @@ plugins:
   - offline
 theme:
   name: material
+  favicon: img/favicon.ico
   features:
     - navigation.footer
   palette:
