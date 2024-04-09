@@ -21,6 +21,12 @@ public class GatewayConfig {
         return builder.routes()
                 .route("user-service", r -> r.path("/**")
                         .uri("lb://USER-SERVICE"))
+                .route("cow-service", r -> r.path("/**")
+                        .uri("lb://COW-SERVICE"))
+                .route("weather-service", r -> r.path("/**")
+                        .uri("lb://WEATHER-SERVICE"))
+                .route("data-service", r -> r.path("/**")
+                        .uri("lb://DATA-SERVICE"))
                 .build();
     }
 
