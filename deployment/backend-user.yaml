@@ -44,7 +44,7 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - port: 27017
+    - port: 2000
       name: user-svc
   selector:
     app: livius
