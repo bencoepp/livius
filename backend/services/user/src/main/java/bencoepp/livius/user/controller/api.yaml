@@ -39,6 +39,33 @@ paths:
       responses:
         '200':
           description: Message that the user was successfully registered with livius.
+  /api/v1/user/me:
+    get:
+      summary: Returns currently logged in user.
+      description: Returns the currently logged in user.
+      responses:
+        '200':
+          description: User object that represents the currently logged in user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/v1/user/update:
+    put:
+      summary: Update current users user information.
+      description: Based on the provided user information, the current logged in user will be updated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+      responses:
+        '200':
+          description: User object that represents the currently logged in user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 components:
   schemas:
     LoginRequest:
@@ -51,6 +78,19 @@ components:
     SignupRequest:
       description: Sign up request, consisting of the user data that should be included in livius.
       properties:
+        username:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+        password:
+          type: string
+    User:
+      description: User object of livius, this represents a user that can access the api.
+      properties:
+        id:
+          type: string
         username:
           type: string
         email:
