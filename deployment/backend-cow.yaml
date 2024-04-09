@@ -32,3 +32,20 @@ spec:
               value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
             - name: LIVIUS_DB
               value: test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data
+  namespace: livius
+  labels:
+    app: livius
+    tier: cow
+spec:
+  clusterIP: None
+  ports:
+    - port: 5000
+      name: cow-svc
+  selector:
+    app: livius
+    tier: cow

@@ -1,0 +1,12 @@
+name: Build and deliver frontend
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Build and deliver frontend
+    steps:
+      - uses: actions/checkout@master
+      - run: docker build -t registry.bencoepp.de/livius/frontend . -f ./frontend/Dockerfile
+      - run: docker push registry.bencoepp.de/livius/frontend

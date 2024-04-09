@@ -44,7 +44,7 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - port: 27017
+    - port: 4000
       name: weather-svc
   selector:
     app: livius
