@@ -1,0 +1,74 @@
+openapi: "3.0.2"
+info:
+  title: Livius - User API
+  description: The main api for handling user data and the access to it. As well as login and registration. This is required by all other apis.
+  version: "1.0.0.0"
+servers:
+  - url: https://livius.io
+    description: Public api, can be used for testing or general use. There are some limiters in place to prevent abuse.
+  - url: http://localhost:2000
+    description: API hosted through the localhost. This should be provided by you.
+paths:
+  /api/v1/auth/signin:
+    post:
+      summary: Sign in to livius.
+      description: Sign in with your user credentials and get a JWT Token to authenticate other requests with.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Token for further use.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwtResponse'
+  /api/v1/auth/signup:
+    post:
+      summary: Sign up to livius.
+      description: Sign up for livius, this is needed if you want to access any of the apis.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+      responses:
+        '200':
+          description: Message that the user was successfully registered with livius.
+components:
+  schemas:
+    LoginRequest:
+      description: Login request object that needs to be filled with the correct data.
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    SignupRequest:
+      description: Sign up request, consisting of the user data that should be included in livius.
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+        password:
+          type: string
+    JwtResponse:
+      description: Response object after a successful login request.
+      properties:
+        token:
+          type: string
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
