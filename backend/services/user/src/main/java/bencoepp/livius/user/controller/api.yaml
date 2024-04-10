@@ -4,7 +4,7 @@ info:
   description: The main api for handling user data and the access to it. As well as login and registration. This is required by all other apis.
   version: "1.0.0.0"
 servers:
-  - url: https://livius.io
+  - url: https://api.livius.io
     description: Public api, can be used for testing or general use. There are some limiters in place to prevent abuse.
   - url: http://localhost:2000
     description: API hosted through the localhost. This should be provided by you.
