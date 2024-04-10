@@ -19,14 +19,14 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service", r -> r.path("/**")
+                .route("user-service", r -> r.path("/api/v1/user/**")
                         .uri("lb://USER-SERVICE"))
-                .route("cow-service", r -> r.path("/**")
+                .route("auth-service", r -> r.path("/api/v1/auth/**")
+                        .uri("lb://USER-SERVICE"))
+                .route("cow-service", r -> r.path("/api/v1/cow/**")
                         .uri("lb://COW-SERVICE"))
-                .route("weather-service", r -> r.path("/**")
+                .route("weather-service", r -> r.path("/api/v1/weather/**")
                         .uri("lb://WEATHER-SERVICE"))
-                .route("data-service", r -> r.path("/**")
-                        .uri("lb://DATA-SERVICE"))
                 .build();
     }
 
