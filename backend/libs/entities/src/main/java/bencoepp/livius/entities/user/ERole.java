@@ -11,6 +11,7 @@ package bencoepp.livius.entities.user;
  * - ROLE_USER: Represents a user role.
  * - ROLE_MODERATOR: Represents a moderator role.
  * - ROLE_ADMIN: Represents an admin role.
+ * - ROLE_PRIVILEGED: Represents a privileged user
  * <p>
  * These roles can be used to determine the level of access or permissions a
  * user has within the system.
@@ -18,5 +19,6 @@ package bencoepp.livius.entities.user;
 public enum ERole {
     ROLE_USER,
     ROLE_MODERATOR,
-    ROLE_ADMIN
+    ROLE_ADMIN,
+    ROLE_PRIVILEGED
 }
