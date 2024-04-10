@@ -10,12 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>repositories</artifactId>
-
+    <version>1.0.0.1</version>
     <dependencies>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>entities</artifactId>
-            <version>1.0.0.0</version>
+            <version>1.0.0.1</version>
         </dependency>
     </dependencies>
 
