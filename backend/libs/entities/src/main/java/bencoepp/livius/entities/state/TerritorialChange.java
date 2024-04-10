@@ -54,9 +54,9 @@ public class TerritorialChange {
      *
      * @see State
      * @see State#getMonth()
-     * @see State#setMonth(Integer)
+     * @see State#setMonth(String)
      */
-    private Integer month;
+    private String month;
     /**
      * The gainingSide variable represents a list of State objects representing the gaining side in a territorial change.
      * <p>
@@ -200,9 +200,9 @@ public class TerritorialChange {
      *
      * @see TerritorialChange
      * @see TerritorialChange#getAreaOfUnitExchangedInSquareKilometers()
-     * @see TerritorialChange#setAreaOfUnitExchangedInSquareKilometers(Double)
+     * @see TerritorialChange#setAreaOfUnitExchangedInSquareKilometers(String)
      */
-    private Double areaOfUnitExchangedInSquareKilometers;
+    private String areaOfUnitExchangedInSquareKilometers;
     /**
      * Represents the population of a unit being exchanged.
      * <p>
@@ -217,9 +217,9 @@ public class TerritorialChange {
      *
      * @see TerritorialChange
      * @see TerritorialChange#getPopulationOfUnitExchanged()
-     * @see TerritorialChange#setPopulationOfUnitExchanged(Integer)
+     * @see TerritorialChange#setPopulationOfUnitExchanged(String)
      */
-    private Integer populationOfUnitExchanged;
+    private String populationOfUnitExchanged;
     /**
      * Represents the portion of a unit that is exchanged in a territorial change.
      * <p>
@@ -236,10 +236,10 @@ public class TerritorialChange {
      *
      * @see TerritorialChange
      * @see TerritorialChange#getPortionOfUnitExchanged()
-     * @see TerritorialChange#setPortionOfUnitExchanged(Integer)
+     * @see TerritorialChange#setPortionOfUnitExchanged(String)
      * @see State
      */
-    private Integer portionOfUnitExchanged;
+    private String portionOfUnitExchanged;
     /**
      * The `losingSide` variable is a private instance variable in the `TerritorialChange` class. It represents a list of `State` objects that are part of the losing side in a territorial
      *  change.

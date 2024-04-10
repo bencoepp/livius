@@ -23,6 +23,12 @@ import java.util.List;
 
 import static bencoepp.livius.utils.COWUtil.DOWNLOAD_DIR;
 
+/**
+ * The TerritorialChangeTask class represents a task that is executed to process a territorial change job.
+ * It extends the Task class.
+ * It is responsible for unpacking a .zip file, processing a CSV file, and saving the territorial change data
+ * to the TerritorialChangeRepository.
+ */
 @Component
 @Slf4j
 public class TerritorialChangeTask extends Task {
@@ -38,8 +44,13 @@ public class TerritorialChangeTask extends Task {
     @Autowired
     private TerritorialChangeRepository territorialChangeRepository;
 
+    /**
+     * Runs the job specified in the {@link JobEvent} event.
+     *
+     * @param event The job event containing the job ID.
+     */
     @Override
-    @EventListener(condition = "#event.condition.equals('livius.cow.intra-state-war.zip')")
+    @EventListener(condition = "#event.condition.equals('livius.cow.tc.zip')")
     public void run(JobEvent event) {
         job = jobRepository.findById(event.getJobId()).get();
 
@@ -69,12 +80,13 @@ public class TerritorialChangeTask extends Task {
 
                 try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
                     bufferedReader.lines().forEach(line -> {
-                        if(!line.contains("year,month,gainer,gaintype,procedur,entity")){
+                        if(!line.contains("year,")){
+                            line = line.replace(",.,", ",,");
                             String[] data = line.split(",");
                             TerritorialChange change = new TerritorialChange();
                             change.setId(sequenceGeneratorService.getSequenceNumber(TerritorialChange.SEQUENCE_NAME));
                             change.setYear(Integer.parseInt(data[0]));
-                            change.setMonth(Integer.parseInt(data[1]));
+                            change.setMonth(data[1]);
 
                             change.setGainingSide(stateRepository.findByCowId(Integer.valueOf(data[2])));
                             change.setTypeOfChangeForGainingSide(util.findTerritoryGainType(Integer.valueOf(data[3])));
@@ -83,9 +95,10 @@ public class TerritorialChangeTask extends Task {
                             change.setEntityExchanged(data[5]);
 
                             change.setContiguityOfUnitExchangedToTheGainingState(data[6]);
-                            change.setAreaOfUnitExchangedInSquareKilometers(Double.valueOf(data[7]));
-                            change.setPopulationOfUnitExchanged(Integer.valueOf(data[8]));
-                            change.setPortionOfUnitExchanged(Integer.valueOf(data[9]));
+
+                            change.setAreaOfUnitExchangedInSquareKilometers(data[7]);
+                            change.setPopulationOfUnitExchanged(data[8]);
+                            change.setPortionOfUnitExchanged(data[9]);
 
                             change.setLosingSide(stateRepository.findByCowId(Integer.valueOf(data[10])));
                             change.setTypeOfChangeForLosingSide(util.findTerritoryGainType(Integer.valueOf(data[11])));

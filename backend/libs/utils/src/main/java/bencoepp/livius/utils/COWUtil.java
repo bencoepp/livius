@@ -323,12 +323,14 @@ public class COWUtil {
             File newFile = newFile(destDir, zipEntry);
             if (zipEntry.isDirectory()) {
                 if (!newFile.isDirectory() && !newFile.mkdirs()) {
+                    csvZipFileCounter = 0;
                     throw new IOException("Failed to create directory " + newFile);
                 }
             } else {
                 // fix for Windows-created archives
                 File parent = newFile.getParentFile();
                 if (!parent.isDirectory() && !parent.mkdirs()) {
+                    csvZipFileCounter = 0;
                     throw new IOException("Failed to create directory " + parent);
                 }
 
@@ -346,6 +348,7 @@ public class COWUtil {
 
         zis.closeEntry();
         zis.close();
+        csvZipFileCounter = 0;
         return output;
     }
 
@@ -371,6 +374,7 @@ public class COWUtil {
         String destFilePath = destFile.getCanonicalPath();
 
         if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            csvZipFileCounter = 0;
             throw new IOException("Entry is outside of the target dir: " + fileName);
         }
 
