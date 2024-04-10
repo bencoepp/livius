@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>utils</artifactId>
+    <version>1.0.0.1</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -20,12 +21,12 @@
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>entities</artifactId>
-            <version>1.0.0.0</version>
+            <version>1.0.0.1</version>
         </dependency>
         <dependency>
             <groupId>bencoepp.livius</groupId>
             <artifactId>repositories</artifactId>
-            <version>1.0.0.0</version>
+            <version>1.0.0.1</version>
         </dependency>
     </dependencies>
 

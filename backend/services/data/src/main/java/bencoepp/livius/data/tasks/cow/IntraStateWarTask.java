@@ -153,7 +153,7 @@ public class IntraStateWarTask extends Task {
                             try {
                                 war.setTransTo(Integer.valueOf(data[38]));
                             }catch (Exception e){
-                                log.error("A . was found in the id of the war", e);
+                                log.error("A . was found in the id of the war");
                             }
                             war.setSideADeaths(Long.valueOf(data[39]));
                             war.setSideBDeaths(Long.valueOf(data[40]));
@@ -168,11 +168,11 @@ public class IntraStateWarTask extends Task {
                     });
 
                 } catch (Exception e) {
-                    log.error("Error occurred while streaming CSV file content", e);
+                    log.error("Error occurred while streaming CSV file content");
                 }
 
             } catch (IOException e) {
-                log.error("Not able to unpack zip:", e);
+                log.error("Not able to unpack zip:");
             }
             super.run(event);
         }

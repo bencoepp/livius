@@ -3,6 +3,7 @@ package bencoepp.livius.utils;
 import bencoepp.livius.entities.religion.Religion;
 import bencoepp.livius.entities.state.DiplomaticExchange;
 import bencoepp.livius.entities.state.State;
+import bencoepp.livius.entities.state.TerritorialChange;
 import bencoepp.livius.entities.war.War;
 import bencoepp.livius.repositories.state.StateRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -233,6 +234,41 @@ public class COWUtil {
     }
 
     /**
+     * Finds the territory gain type based on the provided type value.
+     *
+     * @param type the type value to determine the territory gain type
+     * @return the territory gain type as a string
+     *
+     * @param type the type value to determine the territory gain type
+     * @return the territory gain type as a string
+     */
+    public String findTerritoryGainType(Integer type){
+        return switch (type) {
+            case 0 -> TerritorialChange.TYPE_DEPENDENT_TERRITORY;
+            case 1 -> TerritorialChange.TYPE_HOMELAND_TERRITORY;
+            default -> TerritorialChange.TYPE_NONE;
+        };
+    }
+
+    /**
+     * Finds the territorial exchange procedure based on the given procedure number.
+     *
+     * @param procedure the procedure number
+     * @return the territorial exchange procedure associated with the given number
+     */
+    public String findTerritoryExchangeProcedure(Integer procedure){
+        return switch (procedure) {
+            case 1 -> TerritorialChange.PROCEDURE_CONQUEST;
+            case 2 -> TerritorialChange.PROCEDURE_ANNEXATION;
+            case 3 -> TerritorialChange.PROCEDURE_CESSION;
+            case 4 -> TerritorialChange.PROCEDURE_SECESSION;
+            case 5 -> TerritorialChange.PROCEDURE_UNIFICATION;
+            case 6 -> TerritorialChange.PROCEDURE_MANDATED_TERRITORY;
+            default -> TerritorialChange.PROCEDURE_NONE;
+        };
+    }
+
+    /**
      * Creates a non-state entity with the given name.
      *
      * @param name the name of the entity to be created
@@ -287,12 +323,14 @@ public class COWUtil {
             File newFile = newFile(destDir, zipEntry);
             if (zipEntry.isDirectory()) {
                 if (!newFile.isDirectory() && !newFile.mkdirs()) {
+                    csvZipFileCounter = 0;
                     throw new IOException("Failed to create directory " + newFile);
                 }
             } else {
                 // fix for Windows-created archives
                 File parent = newFile.getParentFile();
                 if (!parent.isDirectory() && !parent.mkdirs()) {
+                    csvZipFileCounter = 0;
                     throw new IOException("Failed to create directory " + parent);
                 }
 
@@ -310,6 +348,7 @@ public class COWUtil {
 
         zis.closeEntry();
         zis.close();
+        csvZipFileCounter = 0;
         return output;
     }
 
@@ -335,6 +374,7 @@ public class COWUtil {
         String destFilePath = destFile.getCanonicalPath();
 
         if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            csvZipFileCounter = 0;
             throw new IOException("Entry is outside of the target dir: " + fileName);
         }
 
