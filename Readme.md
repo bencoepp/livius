@@ -1,5 +1,11 @@
 # Historical War and Conflict Data Visualization Tool
 
+| :memo:        | Project still under active development, NO RELEASE up until now. Please contact us for any issues |
+|---------------|:--------------------------------------------------------------------------------------------------|
+
+| :point_up:    | Remember to not forget! |
+|---------------|:------------------------|
+
 This project exists for two very distinct reasons. The first one is about the actual technical challenges that come from
 this project and the different technologies that are used in it. Furthermore, as this is a project mainly for
 demonstrative proposals, I also have the challenge of creating, maintaining, and developing a project that can be
