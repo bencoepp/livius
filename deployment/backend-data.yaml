@@ -33,9 +33,9 @@ spec:
             - name: LIVIUS_DB
               value: test
             - name: LIVIUS_APP_COW_START_JOBS
-              value: true
+              value: 'true'
             - name: LIVIUS_APP_WEATHER_START_JOBS
-              value: true
+              value: 'true'
 ---
 apiVersion: v1
 kind: Service
