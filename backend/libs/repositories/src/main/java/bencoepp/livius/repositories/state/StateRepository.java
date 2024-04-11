@@ -3,6 +3,7 @@ package bencoepp.livius.repositories.state;
 import bencoepp.livius.entities.state.State;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,5 +96,82 @@ public interface StateRepository extends MongoRepository<State, String> {
      */
     List<State> findByName(String name);
 
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given code.
+     *
+     * @param code the code associated with the states to search for
+     * @return a list of {@link State} objects matching the given code
+     */
     List<State> findByCode(String code);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database based on the given start date.
+     *
+     * @param startDate the start date to search for
+     * @return a list of {@link State} objects matching the given start date
+     */
+    List<State> findByStartDate(Date startDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database based on the given end date.
+     *
+     * @param endDate the end date to search for
+     * @return a list of {@link State} objects matching the given end date
+     */
+    List<State> findByEndDate(Date endDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given start date after the specified date.
+     *
+     * @param startDate the start date to search for
+     * @return a list of {@link State} objects matching the given start date
+     */
+    List<State> findByStartDateAfter(Date startDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given start date before the specified date.
+     *
+     * @param startDate the start date to search for
+     * @return a list of {@link State} objects matching the given start date
+     */
+    List<State> findByStartDateBefore(Date startDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given end date before the specified date.
+     *
+     * @param endDate the end date to search for
+     * @return a list of {@link State} objects matching the given end date
+     */
+    List<State> findByEndDateBefore(Date endDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given end date after the specified date.
+     *
+     * @param endDate the end date to search for
+     * @return a list of {@link State} objects matching the given end date
+     */
+    List<State> findByEndDateAfter(Date endDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * based on the given start date after the specified date and end date before the specified date.
+     *
+     * @param startDate the start date to search for, not null
+     * @param endDate the end date to search for, not null
+     * @return a list of {@link State} objects matching the given start date after the specified date and end date before the specified date
+     */
+    List<State> findByStartDateAfterAndEndDateBefore(Date startDate, Date endDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * where the wasMajorPower field is not empty.
+     *
+     * @return a list of {@link State} objects where the wasMajorPower field is not empty
+     */
+    List<State> findByWasMajorPowerNotEmpty();
 }

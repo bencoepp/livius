@@ -40,7 +40,7 @@ public class Religion {
     private Integer christianProtestantNoOfAdherents;
     /**
      * Represents the number of adherents of Roman Catholics in the Christian religion.
-     *
+     * <p>
      * This variable stores an Integer value.
      */
     private Integer christianRomanCatholicsNoOfAdherents;

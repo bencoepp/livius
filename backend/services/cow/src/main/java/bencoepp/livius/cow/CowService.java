@@ -1,4 +1,4 @@
-package bencoepp.livius.event;
+package bencoepp.livius.cow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

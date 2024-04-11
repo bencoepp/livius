@@ -35,17 +35,17 @@ public class DiplomaticExchange {
     private String id;
     /**
      * The year variable represents the year associated with a specific State object.
-     *
+     * <p>
      * It is a private Integer field in the State class.
-     *
+     * <p>
      * The year is used to indicate the year in which the state was active or valid.
      * It can be used to filter and sort state records based on their associated year.
-     *
+     * <p>
      * Example usage:
      * State state = new State();
      * state.setYear(2022);
      * Integer year = state.getYear();
-     *
+     * <p>
      * System.out.println("Year: " + year);
      *
      * @see State
@@ -86,29 +86,29 @@ public class DiplomaticExchange {
      * It is a private instance variable within the DiplomaticExchange class.
      * The sideB variable is annotated with @DocumentReference, indicating that it refers to the "sideB" field in the MongoDB database.
      * The "sideB" field contains a list of State objects representing the states involved in a diplomatic exchange on side B.
-     *
+     * <p>
      * Example usage:
-     *
+     * <p>
      * // Create a new DiplomaticExchange object
      * DiplomaticExchange exchange = new DiplomaticExchange();
-     *
+     * <p>
      * // Create a new State object
      * State state1 = new State();
      * state1.setId("1");
      * state1.setName("State A");
-     *
+     * <p>
      * // Create a new State object
      * State state2 = new State();
      * state2.setId("2");
      * state2.setName("State B");
-     *
+     * <p>
      * // Add the State objects to the sideB list
      * exchange.getSideB().add(state1);
      * exchange.getSideB().add(state2);
-     *
+     * <p>
      * // Get the sideB list from the DiplomaticExchange object
      * List<State> sideB = exchange.getSideB();
-     *
+     * <p>
      * // Iterate over the sideB list and print the names of the states
      * for (State state : sideB) {
      *     System.out.println(state.getName());
@@ -130,7 +130,7 @@ public class DiplomaticExchange {
      * <p>
      * This code indicates that there is no evidence of a diplomatic exchange between two parties.
      * It can be used to represent a specific condition or state of a diplomatic relationship.
-     *
+     * <p>
      * Example usage:
      * <pre>{@code
      * String evidence = DiplomaticExchange.DR_NO_EVIDENCE_OF_DIPLOMATIC_EXCHANGE;
