@@ -160,4 +160,23 @@ public class CountryController {
     public ResponseEntity<List<Country>> getAllCountry() {
         return ResponseEntity.ok(countryRepository.findAll());
     }
+
+    /**
+     * Returns the total count of countries in the country repository.
+     *
+     * <p>
+     * This method retrieves the count of countries by invoking the {@link CountryRepository#count()} method.
+     * The count represents the number of countries stored in the country repository.
+     * </p>
+     *
+     * @return a ResponseEntity object containing the total count of countries in the country repository.
+     *
+     * @see CountryController
+     * @see CountryRepository
+     * @see ResponseEntity
+     */
+    @GetMapping("/count/total")
+    public ResponseEntity<Long> getCountryCount() {
+        return ResponseEntity.ok(countryRepository.count());
+    }
 }
