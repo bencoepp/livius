@@ -170,7 +170,7 @@ public class MajorPowerController {
      * @return a ResponseEntity containing a list of MajorPower entities with the end date before the provided date,
      *         or a bad request response if the date is in an invalid format
      */
-    @GetMapping("/start/before/{date}")
+    @GetMapping("/end/before/{date}")
     public ResponseEntity<List<MajorPower>> getByBeforeEndDate(@PathVariable String date){
         try {
             Date endDate = new SimpleDateFormat("dd.MM.yyyy").parse(date);
@@ -187,7 +187,7 @@ public class MajorPowerController {
      * @return a ResponseEntity containing a list of MajorPower entities with the end date after the provided date,
      *         or a bad request response if the date is in an invalid format
      */
-    @GetMapping("/start/after/{date}")
+    @GetMapping("/end/after/{date}")
     public ResponseEntity<List<MajorPower>> getByAfterEndDate(@PathVariable String date){
         try {
             Date endDate = new SimpleDateFormat("dd.MM.yyyy").parse(date);
