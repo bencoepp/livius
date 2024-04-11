@@ -166,4 +166,12 @@ public interface StateRepository extends MongoRepository<State, String> {
      * @return a list of {@link State} objects matching the given start date after the specified date and end date before the specified date
      */
     List<State> findByStartDateAfterAndEndDateBefore(Date startDate, Date endDate);
+
+    /**
+     * Finds a list of states in the "states" collection of the MongoDB database
+     * where the wasMajorPower field is not empty.
+     *
+     * @return a list of {@link State} objects where the wasMajorPower field is not empty
+     */
+    List<State> findByWasMajorPowerNotEmpty();
 }
