@@ -150,12 +150,6 @@ public class StateController {
      *         response body. If no state objects are found in the database, an empty list
      *         is returned.
      *
-     * @param date The start date in the format "dd.MM.yyyy".
-     * @return A ResponseEntity containing a list of State objects. The response entity has
-     *         a status code of 200 (OK) if successful, and a list of state objects in the
-     *         response body. If no state objects are found in the database, an empty list
-     *         is returned.
-     *
      * @see State
      * @see ResponseEntity
      * @see ResponseEntity#ok(Object)
