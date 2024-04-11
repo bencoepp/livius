@@ -3,6 +3,8 @@ package bencoepp.livius.repositories.state;
 import bencoepp.livius.entities.state.DiplomaticExchange;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 /**
  * The DiplomaticExchangeRepository interface is responsible for managing the persistence and retrieval
  * of DiplomaticExchange objects in the database.
@@ -18,4 +20,19 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * DiplomaticExchange objects in the database.
  */
 public interface DiplomaticExchangeRepository extends MongoRepository<DiplomaticExchange, String> {
+    List<DiplomaticExchange> findByYear(Integer year);
+
+    List<DiplomaticExchange> findByYearLessThanEqual(Integer year);
+
+    List<DiplomaticExchange> findByYearGreaterThanEqual(Integer year);
+
+    List<DiplomaticExchange> findBySideA_Id(String id);
+
+    List<DiplomaticExchange> findBySideB_Id(String id);
+
+    List<DiplomaticExchange> findByDiplomaticRepresentationLevelSideA(String diplomaticRepresentationLevelSideA);
+
+    List<DiplomaticExchange> findByDiplomaticRepresentationLevelSideB(String diplomaticRepresentationLevelSideB);
+
+    List<DiplomaticExchange> findByAnyDiplomaticExchange(String anyDiplomaticExchange);
 }
