@@ -32,6 +32,10 @@ spec:
               value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
             - name: LIVIUS_DB
               value: test
+            - name: LIVIUS_APP_COW_START_JOBS
+              value: true
+            - name: LIVIUS_APP_WEATHER_START_JOBS
+              value: true
 ---
 apiVersion: v1
 kind: Service
