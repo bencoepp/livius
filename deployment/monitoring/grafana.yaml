@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: livius
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: livius
+      tier: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: livius
+        tier: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: grafana-storage
+          - mountPath: /etc/grafana/provisioning/datasources
+            name: grafana-datasources
+            readOnly: false
+      volumes:
+        - name: grafana-storage
+          emptyDir: { }
+        - name: grafana-datasources
+          configMap:
+            defaultMode: 420
+            name: grafana-datasources
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: livius
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '3000'
+spec:
+  selector:
+    app: livius
+    tier: grafana
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 32000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: livius
+data:
+  datasources.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus.lens-metrics.svc.cluster.local:9090
+        isDefault: true
+        editable: true
+        jsonData:
+          httpMethod: GET
+      - name: Tempo
+        type: tempo
+        access: proxy
+        url: http://tempo.livius.svc.cluster.local:3200
+        editable: true
+        jsonData:
+          httpMethod: GET
+          tracesToLogs:
+            datasourceUid: 'loki' # Ensure this matches the UID of the Loki data source
+            enabled: true
+            tags: ['job', 'hostname', 'container_name'] # Adjust based on your tagging strategy
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki.livius.svc.cluster.local:3100
+        editable: true
+        jsonData:
+          httpMethod: GET
+          derivedFields:
+            - datasourceUid: 'tempo' # Ensure this matches the UID of the Tempo data source
+              matcherRegex: 'traceID=(\\w+)' # Adjust based on your log format
+              name: 'TraceID'
+              url: '$${__value.raw}' # This is a template variable that Grafana will replace based on the actual log data
