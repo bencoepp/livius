@@ -12,6 +12,7 @@ import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
@@ -40,6 +41,8 @@ public class ExtraStateWarTask extends Task {
     private COWUtil util;
     @Autowired
     private StateRepository stateRepository;
+    @Value("${livius.cow.load-wars}")
+    private Boolean startJob;
 
     /**
      * Executes the job when a {@link JobEvent} is triggered.
@@ -60,7 +63,9 @@ public class ExtraStateWarTask extends Task {
             }
         }
 
-        if(skip){
+        if(!startJob){
+            log.info("Job will be skipped");
+        } else if(skip){
             log.info("Waiting for dependency to finish executing");
         }else {
             job.setStatus(Job.STATUS_EXECUTING);

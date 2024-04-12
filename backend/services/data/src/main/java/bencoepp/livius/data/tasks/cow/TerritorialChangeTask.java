@@ -11,6 +11,7 @@ import bencoepp.livius.utils.COWUtil;
 import bencoepp.livius.utils.SequenceGeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,8 @@ public class TerritorialChangeTask extends Task {
     private StateRepository stateRepository;
     @Autowired
     private TerritorialChangeRepository territorialChangeRepository;
+    @Value("${livius.cow.load-tc}")
+    private Boolean startJob;
 
     /**
      * Runs the job specified in the {@link JobEvent} event.
@@ -63,7 +66,9 @@ public class TerritorialChangeTask extends Task {
             }
         }
 
-        if (skip) {
+        if(!startJob){
+            log.info("Job will be skipped");
+        } else if(skip){
             log.info("Waiting for dependency to finish executing");
         } else {
             job.setStatus(Job.STATUS_EXECUTING);
