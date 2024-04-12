@@ -200,6 +200,15 @@ public class Trade {
      * @see Trade#setImporterBFlow(Double)
      */
     private Double importerBFlow;
+    private Double smoothedAFlow;
+    private Double smoothedBFlow;
+    private String smoothedTrade;
+    private String spikeA;
+    private String spikeB;
+    private String dipA;
+    private String dipB;
+    private String tradeSpike;
+    private String tradeDip;
     /**
      * The sourceImporterAFlow variable represents the source importer A flow associated with a Trade object.
      * <p>
@@ -313,4 +322,14 @@ public class Trade {
      * @see Trade#setOriginalLUXTradeValuesImporterB(String)
      */
     private String originalLUXTradeValuesImporterB;
+    public static final String SOURCE_MISSING_DATA = "missing_data";
+    public static final String SOURCE_BARBIERI_V1 = "barbieri_v1";
+    public static final String SOURCE_HICKS_2015_IMPORTS_STATE_A_FROM_B = "hicks_2015_imports_state_a_from_b";
+    public static final String SOURCE_REVISED_HICKS_IMPORT = "revised_hicks_import";
+    public static final String SOURCE_HICKS_EXPORT_REPORT_FLOW_A = "hicks_export_report_flow_a";
+    public static final String SOURCE_REVISED_HICKS_EXPORT = "revised_hicks_export";
+    public static final String SOURCE_IMF_IMPORT_REPORTS_2015 = "imf_import_reports_2015";
+    public static final String SOURCE_MISSING_IMPORT_VALUES_REPLACED_WITH_IMF_EXPORT = "missing_import_values_replaced_with_imf_export";
+    public static final String SOURCE_ZERO_TRADE_VALUES_REPLACED_WITH_IMF_EXPORT = "zero_trade_values_replaced_with_imf_export";
+    public static final String SOURCE_MISSING_COW_4_DATA_REPLACED_WITH_COW_3 = "missing_cow_4_data_replaced_with_cow_3";
 }

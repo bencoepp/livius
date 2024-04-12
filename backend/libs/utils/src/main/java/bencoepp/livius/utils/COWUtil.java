@@ -4,6 +4,7 @@ import bencoepp.livius.entities.religion.Religion;
 import bencoepp.livius.entities.state.DiplomaticExchange;
 import bencoepp.livius.entities.state.State;
 import bencoepp.livius.entities.state.TerritorialChange;
+import bencoepp.livius.entities.trade.Trade;
 import bencoepp.livius.entities.war.War;
 import bencoepp.livius.repositories.state.StateRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -265,6 +266,27 @@ public class COWUtil {
             case 5 -> TerritorialChange.PROCEDURE_UNIFICATION;
             case 6 -> TerritorialChange.PROCEDURE_MANDATED_TERRITORY;
             default -> TerritorialChange.PROCEDURE_NONE;
+        };
+    }
+
+    /**
+     * This method is used to find the trade source based on the given source code.
+     *
+     * @param source The source code used to identify the trade source.
+     * @return The trade source corresponding to the given source code.
+     */
+    public String findTradeSource(String source){
+        return switch (source) {
+            case "1" -> Trade.SOURCE_BARBIERI_V1;
+            case "2" -> Trade.SOURCE_HICKS_2015_IMPORTS_STATE_A_FROM_B;
+            case "2.01" -> Trade.SOURCE_REVISED_HICKS_IMPORT;
+            case "2.1" -> Trade.SOURCE_HICKS_EXPORT_REPORT_FLOW_A;
+            case "2.11" -> Trade.SOURCE_REVISED_HICKS_EXPORT;
+            case "3" -> Trade.SOURCE_IMF_IMPORT_REPORTS_2015;
+            case "4" -> Trade.SOURCE_MISSING_IMPORT_VALUES_REPLACED_WITH_IMF_EXPORT;
+            case "5" -> Trade.SOURCE_ZERO_TRADE_VALUES_REPLACED_WITH_IMF_EXPORT;
+            case "6" -> Trade.SOURCE_MISSING_COW_4_DATA_REPLACED_WITH_COW_3;
+            default -> Trade.SOURCE_MISSING_DATA;
         };
     }
 
