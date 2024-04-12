@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: data-service
-          image: registry.bencoepp.de/livius/data:1.0.0.3
+          image: registry.bencoepp.de/livius/data:1.0.0.4
           ports:
             - containerPort: 3000
           env:

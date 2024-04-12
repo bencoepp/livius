@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: eureka
-          image: registry.bencoepp.de/livius/eureka:1.0.0.0
+          image: registry.bencoepp.de/livius/eureka:1.0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
