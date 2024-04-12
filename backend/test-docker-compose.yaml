@@ -16,26 +16,16 @@ services:
     restart: always
     ports:
       - "8761:8761"
-  user:
-    image: registry.bencoepp.de/livius/user
-    restart: always
+  loki:
+    image: grafana/loki:main
+    command: [ "-config.file=/etc/loki/local-config.yaml" ]
     ports:
-      - "2000:2000"
-  data:
-    image: registry.bencoepp.de/livius/data
-    restart: always
+      - "3100:3100"
+  tempo:
+    image: grafana/tempo:2.2.2
+    command: [ "-config.file=/etc/tempo.yaml" ]
     ports:
-      - "3000:3000"
-  weather:
-    image: registry.bencoepp.de/livius/weather
-    restart: always
-    ports:
-      - "4000:4000"
-  cow:
-    image: registry.bencoepp.de/livius/cow
-    restart: always
-    ports:
-      - "5000:5000"
-
+      - "3110:3100"  # Tempo
+      - "9411:9411" # zipkin
 volumes:
   mongo-data:
