@@ -12,6 +12,15 @@ management:
     web:
       exposure:
         include: '*'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  observations:
+    key-values:
+      application: USER-SERVICE
 eureka:
   instance:
     preferIpAddress: true
