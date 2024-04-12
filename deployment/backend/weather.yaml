@@ -32,6 +32,8 @@ spec:
               value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
             - name: LIVIUS_DB
               value: test
+            - name: LIVIUS_LOKI_URI
+              value: loki.livius.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service

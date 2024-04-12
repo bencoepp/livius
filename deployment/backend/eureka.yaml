@@ -48,6 +48,8 @@ spec:
           ports:
             - containerPort: 8761
           env:
+            - name: LIVIUS_LOKI_URI
+              value: loki.livius.svc.cluster.local
             - name: EUREKA_SERVER_ADDRESS
               valueFrom:
                 configMapKeyRef:
