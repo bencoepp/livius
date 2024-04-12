@@ -27,6 +27,9 @@ spec:
           - mountPath: /etc/grafana/provisioning/datasources
             name: grafana-datasources
             readOnly: false
+          - mountPath: /etc/grafana/provisioning/dashboards
+            name: grafana-dashboards
+            readOnly: false
       volumes:
         - name: grafana-storage
           emptyDir: { }
@@ -34,6 +37,10 @@ spec:
           configMap:
             defaultMode: 420
             name: grafana-datasources
+        - name: grafana-dashboards
+          configMap:
+            defaultMode: 420
+            name: grafana-dashboards
 ---
 apiVersion: v1
 kind: Service
@@ -56,6 +63,21 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: grafana-dashboards
+  namespace: livius
+data:
+  default.yaml: |-
+    apiVersion: 1
+    providers:
+      - name: Default
+        folder: Livius
+        type: file
+        options:
+          path: var/lib/grafana/dashboards
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: grafana-datasources
   namespace: livius
 data:
@@ -65,7 +87,7 @@ data:
       - name: Prometheus
         type: prometheus
         access: proxy
-        url: http://prometheus.lens-metrics.svc.cluster.local:9090
+        url: http://prometheus.livius.svc.cluster.local:9090
         isDefault: true
         editable: true
         jsonData:
