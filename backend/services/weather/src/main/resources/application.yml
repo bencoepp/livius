@@ -7,8 +7,10 @@ spring:
     mongodb:
       uri: ${LIVIUS_DB_URI:mongodb://root:example@localhost:27017}
       database: ${LIVIUS_DB:testDb}
-
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:

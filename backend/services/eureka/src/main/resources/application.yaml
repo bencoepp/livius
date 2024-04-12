@@ -9,6 +9,9 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_ADDRESS}
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:

@@ -21,11 +21,5 @@ services:
     command: [ "-config.file=/etc/loki/local-config.yaml" ]
     ports:
       - "3100:3100"
-  tempo:
-    image: grafana/tempo:2.2.2
-    command: [ "-config.file=/etc/tempo.yaml" ]
-    ports:
-      - "3110:3100"  # Tempo
-      - "9411:9411" # zipkin
 volumes:
   mongo-data:
