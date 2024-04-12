@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: registry.bencoepp.de/livius/user:1.0.0.3
+          image: registry.bencoepp.de/livius/user:1.0.0.4
           ports:
             - containerPort: 2000
           env:
@@ -32,6 +32,8 @@ spec:
               value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
             - name: LIVIUS_DB
               value: test
+            - name: LIVIUS_LOKI_URI
+              value: loki.livius.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service

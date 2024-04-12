@@ -4,10 +4,22 @@ spring:
   application:
     name: API-GATEWAY
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:
         include: '*'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  observations:
+    key-values:
+      application: USER-SERVICE
 logging:
   level:
     org:
