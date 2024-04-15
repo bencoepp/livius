@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/navdrawer.dart';
+import 'package:frontend/widgets/user/user_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,12 +17,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Home'),
       ),
       drawer: const NavDrawer(currentPage: '/'),
-      body: const Center(
-        child: Text(
-          'Welcome to your Flutter base project!',
-          style: TextStyle(fontSize: 20.0),
-        ),
-      ),
+      body: UserCard(),
     );
   }
 }
