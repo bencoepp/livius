@@ -2,6 +2,7 @@ package bencoepp.livius.info.controller;
 
 import bencoepp.livius.entities.info.Changelog;
 import bencoepp.livius.repositories.info.ChangelogRepository;
+import bencoepp.livius.utils.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

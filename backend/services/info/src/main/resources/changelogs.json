@@ -1,0 +1,19 @@
+[
+  {
+    "version" : "1.0.0.0",
+    "title" : "First Release",
+    "description" : "This marks the first release of the livius project, as well as the first version that can be accessed by a normal user through the web. For that reason you have below no real changes listed as everything was initially created.",
+    "changes" : [
+      "USER-SERVICE: The user service was added to the project",
+      "WEATHER-SERVICE: The weather service was added to the project",
+      "GATEWAY-SERVICE: The gateway service was added to the project",
+      "INFO-SERVICE: The info service was added to the project",
+      "COW-SERVICE: The cow service was added to the project",
+      "DATA-SERVICE: The data service was added to the project",
+      "EUREKA-SERVICE: The eureka service was added to the project"
+    ],
+    "contributors" : ["Ben Cöppicus"],
+    "created" : "Mon, 15 Apr 2024 16:44:22",
+    "updated" : "Mon, 15 Apr 2024 16:44:22"
+  }
+]

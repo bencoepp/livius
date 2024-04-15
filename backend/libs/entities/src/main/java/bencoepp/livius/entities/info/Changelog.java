@@ -7,9 +7,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.Instant;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,19 +38,7 @@ public class Changelog {
      */
     private String title;
     private String description;
-    private HashMap<String, String> changes;
-    @Transient
-    public static final String CHANGE_TYPE_ADDED = "added";
-    @Transient
-    public static final String CHANGE_TYPE_CHANGED = "changed";
-    @Transient
-    public static final String CHANGE_TYPE_DEPRECATED = "deprecated";
-    @Transient
-    public static final String CHANGE_TYPE_REMOVED = "removed";
-    @Transient
-    public static final String CHANGE_TYPE_FIXED = "fixed";
-    @Transient
-    public static final String CHANGE_TYPE_SECURITY = "security";
+    private List<String> changes;
     /**
      * The contributors variable represents a list of contributors to a changelog entry.
      * It is used in the Changelog class to store the names of individuals who have contributed to the update or change.
@@ -65,12 +52,12 @@ public class Changelog {
      */
     private String acknowledgement;
     private String references;
-    private Instant created;
+    private String created;
     /**
      * The updated variable represents the date and time when the changelog entry was last updated.
      * It is used in the Changelog class to store the updated timestamp of each entry.
      * This variable is of type Instant, which is a representation of a moment in time.
      * It is marked as private, indicating that it can only be accessed within the Changelog class.
      */
-    private Instant updated;
+    private String updated;
 }
