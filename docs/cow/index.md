@@ -34,3 +34,28 @@ information is directly gathered from [https://correlatesofwar.org/](https://cor
 questions please refer to the original authors.
 
 ## Acknowledgment
+
+The big thing that needs to be acknowledged is the great work the people of and around the correlates of war project have
+done and are still doing. It is a tremendous undertaking to compile, order and research such a variety of datasets and keep 
+them in good order. Not to mention the great license and usage. 
+
+This project does not in any why take credit for the work these people listed below have done and are continuing to do. 
+And as already mentioned a bunch of times throughout the documentation please go ahead and read, and support the official 
+datasets so that the work on them can continue. 
+
+### Current Directors
+
+- [Jeff Carter](http://jeffcarter.weebly.com/) (Appalachian State University)
+- [Scott Wolford](http://www.scott-wolford.com/) (University of Texas)
+
+### Past Directors
+
+- [Zeev Maoz](http://maoz.ucdavis.edu/) 2013-2022
+- [Paul F. Diehl](maileto:pdiehl@illinois.edu) 2005-2012
+- [D. Scott Bennett](http://www.personal.psu.edu/dsb10/) 2005-2012
+- [Stuart Bremer](http://journals.cambridge.org/download.php?file=%2FPSC%2FPSC36_02%2FS1049096503002294a.pdf&code=bdf66c3b646952e908c095f29250a990) (interim), 2002-2004
+- [J. David Singer](https://archive.ph/20121211095931/http://sitemaker.umich.edu/jdsinger/home) (deceased), 1963-1998
+
+### Current Associate Director
+
+- [D. Scott Bennett](http://polisci.la.psu.edu/people/dsb10) Pennsylvania State University (since 2005)
