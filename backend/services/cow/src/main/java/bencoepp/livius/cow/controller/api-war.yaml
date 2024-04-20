@@ -379,6 +379,8 @@ components:
         sideBPeakTotalMilitaryForces:
           type: integer
         sideAPeakTheaterForces:
+          description: The sideAPeakTheaterForces variable represents the peak number of theater forces of side A in a war.
           type: integer
         sideBPeakTheaterForces:
+          description: The sideBPeakTheaterForces variable represents the peak theater forces of a war's side B.
           type: integer
