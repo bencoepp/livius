@@ -1,0 +1,384 @@
+openapi: "3.0.2"
+info:
+  title: Livius - War API
+  description: Endpoints for correlates of war data, specifically for the data sets about war
+  version: "1.0.0.4"
+servers:
+  - url: https://livius.io
+    description: Public api, can be used for testing or general use. There are some limiters in place to prevent abuse.
+  - url: http://localhost:5000
+    description: API hosted through the localhost. This should be provided by you.
+paths:
+  /api/v1/cow/war/{id}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/count/total:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/all:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/cow-id/{id}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/name/{name}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/name/contains/{text}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/type/{type}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/region/{region}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-a/{state}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-b/{state}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/initiator/side-a:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/initiator/side-b:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/trans/to/{id}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/trans/from/{id}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/outcome/{outcome}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-a/deaths/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-a/deaths/above/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-a/deaths/below/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-b/deaths/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-b/deaths/above/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/side-b/deaths/below/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/total-combat-deaths/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/total-combat-deaths/above/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+  /api/v1/cow/war/total-combat-deaths/below/{amount}:
+    get:
+      summary: Return a list containing War data.
+      description: The list that is returned here contains a pageable selection of War data.
+      responses:
+        '200':
+          description: A List of War data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/War'
+components:
+  schemas:
+    War:
+      description: This object represents a single war datapoint as described by the cow project.
+      properties:
+        id:
+          type: string
+        cowId:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        region:
+          type: number
+        sideA:
+          type: array
+        sideB:
+          type: array
+        startDates:
+          type: array
+        endDates:
+          type: array
+        initiator:
+          type: boolean
+        transTo:
+          type: integer
+        transFrom:
+          type: integer
+        outcome:
+          type: string
+        sideADeaths:
+          type: number
+        sideBDeaths:
+          type: number
+        totalCompatDeaths:
+          type: number
+        numberOfDaysTheWarLasted:
+          type: string
+        numberOfMonthsTheWarLasted:
+          type: string
+        totalNumberOfMonthsWarWasExperiencedByAllParticipants:
+          type: string
+        intervene:
+          type: boolean
+        nonStateDeaths:
+          type: string
+        nonStateWar:
+          type: boolean
+        intraStateWar:
+          type: boolean
+        internationalized:
+          type: boolean
+        sideAPeakTotalMilitaryForces:
+          type: integer
+        sideBPeakTotalMilitaryForces:
+          type: integer
+        sideAPeakTheaterForces:
+          type: integer
+        sideBPeakTheaterForces:
+          type: integer
