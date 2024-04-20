@@ -34,7 +34,7 @@ class _UserCardState extends State<UserCard> {
               padding: EdgeInsets.all(8.0),
               child: Card(
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: Text("NO CURRENT USER DATA"),
                 ),
               ),
             );
