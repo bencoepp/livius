@@ -31,7 +31,15 @@ class _HomePageState extends State<HomePage> {
             ),
             Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key('Body Medium'),
-              builder: (context) => UserCard(),
+              builder: (context) => Row(
+                children: [
+                  Column(
+                    children: [
+                      UserCard(),
+                    ],
+                  ),
+                ],
+              ),
             )
           },
         ),
