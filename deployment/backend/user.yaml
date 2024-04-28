@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: registry.bencoepp.de/livius/user:1.0.0.4
+          image: registry.bencoepp.de/livius/user:1.0.0.5
           ports:
             - containerPort: 2000
           env:
