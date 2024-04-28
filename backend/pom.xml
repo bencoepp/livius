@@ -18,6 +18,7 @@
   <modules>
     <module>libs</module>
     <module>services</module>
+      <module>services/info</module>
   </modules>
 
   <packaging>pom</packaging>

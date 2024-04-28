@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: info
+  namespace: livius
+  labels:
+    app: livius
+    tier: info
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: livius
+      tier: info
+  template:
+    metadata:
+      labels:
+        app: livius
+        tier: info
+    spec:
+      containers:
+        - name: info-service
+          image: registry.bencoepp.de/livius/info:1.0.0.0
+          ports:
+            - containerPort: 6000
+          env:
+            - name: EUREKA_LIVIUS
+              value: http://eureka-0.eureka.livius.svc.cluster.local:8761/eureka
+            - name: LIVIUS_DB_URI
+              value: mongodb://root:example@mongodb.livius.svc.cluster.local:27017
+            - name: LIVIUS_DB
+              value: test
+            - name: LIVIUS_LOKI_URI
+              value: loki.livius.svc.cluster.local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: info
+  namespace: livius
+  labels:
+    app: livius
+    tier: info
+spec:
+  clusterIP: None
+  ports:
+    - port: 6000
+      name: info-svc
+  selector:
+    app: livius
+    tier: info
